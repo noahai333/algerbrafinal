@@ -1,0 +1,1005 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Algebra 1 Final Practice</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=STIX+Two+Text:ital,wght@0,400;0,600;1,400&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.0/math.min.js"></script>
+<style>
+/* Layout: graph-paper ground, one centered work column; home = session grid, session = one problem card at a time */
+:root{
+  --paper:#f5f8fd; --grid:rgba(47,85,212,.075); --ink:#17223b; --muted:#5a6680; --line:#d6deee;
+  --card:#ffffff; --accent:#2f55d4; --accent-ink:#ffffff; --accent-soft:#e7edfd; --hl:#ffe680;
+  --ok:#1b8049; --ok-soft:#e2f4e9; --bad:#bf3329; --bad-soft:#fbe8e6; --warn:#9a6400; --warn-soft:#fdf1d8;
+  --f-display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --f-body:"Atkinson Hyperlegible",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-math:"STIX Two Text","Cambria Math",Cambria,Georgia,serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0e1422; --grid:rgba(130,160,255,.06); --ink:#e5eaf6; --muted:#9aa5bf; --line:#27314a;
+  --card:#151d30; --accent:#8ea8ff; --accent-ink:#0e1422; --accent-soft:#1f2a4e; --hl:#6b5a17;
+  --ok:#5ccf8c; --ok-soft:#12301f; --bad:#ff8378; --bad-soft:#3b1a18; --warn:#f0bf5a; --warn-soft:#33270f; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0e1422; --grid:rgba(130,160,255,.06); --ink:#e5eaf6; --muted:#9aa5bf; --line:#27314a;
+  --card:#151d30; --accent:#8ea8ff; --accent-ink:#0e1422; --accent-soft:#1f2a4e; --hl:#6b5a17;
+  --ok:#5ccf8c; --ok-soft:#12301f; --bad:#ff8378; --bad-soft:#3b1a18; --warn:#f0bf5a; --warn-soft:#33270f; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.5;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:26px 26px;min-height:100vh}
+.wrap{max-width:860px;margin:0 auto;padding-block:20px 96px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;letter-spacing:-.01em}
+h1{font-size:clamp(1.9rem,5vw,2.7rem);font-weight:800;line-height:1.05}
+h2{font-size:1.35rem;font-weight:700}
+h3{font-size:1.05rem;font-weight:700}
+p{margin:0}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.muted{color:var(--muted)}
+.eyebrow{font-size:.75rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+.math{font-family:var(--f-math)}
+
+/* top bar */
+.top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+.top .spacer{flex:1}
+.btn{border:1.5px solid var(--line);background:var(--card);border-radius:10px;padding:9px 15px;font-weight:700;font-size:.95rem;display:inline-flex;align-items:center;gap:8px;min-height:42px}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.primary:hover{filter:brightness(1.07)}
+.btn.ghost{background:transparent;border-color:transparent;padding-inline:8px}
+.btn.ghost:hover{background:var(--accent-soft)}
+.btn.okb{background:var(--ok);border-color:var(--ok);color:var(--card)}
+.btn.badb{background:var(--bad);border-color:var(--bad);color:var(--card)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+
+/* home */
+.hero{display:grid;gap:14px;margin-bottom:26px}
+.hero p.lede{max-width:60ch;color:var(--muted)}
+.stats{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:baseline;font-variant-numeric:tabular-nums}
+.stats b{font-family:var(--f-display);font-size:1.6rem}
+.quick{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.sess{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:16px;text-align:left;display:grid;gap:8px;align-content:start}
+.sess:hover{border-color:var(--accent)}
+.sess .tag{font-family:var(--f-display);font-weight:800;font-size:.85rem;color:var(--accent)}
+.sess h3{font-size:1.08rem}
+.bar{height:7px;border-radius:99px;background:var(--line);overflow:hidden;display:flex}
+.bar i{display:block;height:100%}
+.bar .r{background:var(--ok)} .bar .m{background:var(--bad)}
+.sess .meta{display:flex;justify-content:space-between;font-size:.85rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.weakcard{border-color:var(--bad);gap:12px}
+.weakcard:hover{border-color:var(--bad)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{background:var(--bad-soft);border-radius:99px;padding:4px 12px;font-size:.88rem}
+.chip b{color:var(--bad)}
+.topics{display:grid;gap:8px}
+.trow{display:grid;grid-template-columns:minmax(0,1fr) 110px 52px;gap:12px;align-items:center;font-size:.92rem;font-variant-numeric:tabular-nums}
+.trow .bar{height:9px}
+.trow .pct{text-align:right;font-weight:700}
+.sectionhead{display:flex;align-items:baseline;gap:12px;margin:30px 0 12px}
+.sectionhead .rule{flex:1;height:1px;background:var(--line)}
+
+/* session */
+.sesshead{display:grid;gap:6px;margin-bottom:14px}
+.dots{display:flex;flex-wrap:wrap;gap:5px;margin:4px 0 16px}
+.dot{width:26px;height:26px;border-radius:7px;border:1.5px solid var(--line);background:var(--card);font-size:.75rem;font-weight:700;display:grid;place-items:center;color:var(--muted);font-variant-numeric:tabular-nums}
+.dot.cur{border-color:var(--accent);color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
+.dot.r{background:var(--ok-soft);border-color:var(--ok);color:var(--ok)}
+.dot.m{background:var(--bad-soft);border-color:var(--bad);color:var(--bad)}
+details.ideas{background:var(--card);border:1.5px solid var(--line);border-radius:12px;margin-bottom:16px}
+details.ideas summary{padding:12px 16px;font-weight:700;cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px}
+details.ideas summary::-webkit-details-marker{display:none}
+details.ideas summary::before{content:"▸";color:var(--accent);transition:transform .15s}
+details.ideas[open] summary::before{transform:rotate(90deg)}
+details.ideas ul{margin:0;padding:0 18px 14px 36px;display:grid;gap:6px}
+details.ideas li{max-width:70ch}
+
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:clamp(16px,3.5vw,28px);display:grid;gap:18px}
+.qnum{font-family:var(--f-display);font-weight:800;color:var(--accent);font-size:.9rem}
+.prompt{font-family:var(--f-math);font-size:clamp(1.25rem,3.2vw,1.55rem);line-height:1.4;overflow-wrap:anywhere}
+.parts{display:grid;gap:14px}
+.part{display:grid;gap:6px}
+.part label,.part .plabel{font-weight:700;font-size:.92rem}
+.inrow{display:flex;gap:8px;align-items:center}
+.inp{flex:1;min-width:0;font-family:var(--f-math);font-size:1.2rem;padding:10px 12px;border-radius:10px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink)}
+.inp:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px var(--accent-soft)}
+textarea.inp{min-height:110px;font-family:var(--f-body);font-size:1rem;resize:vertical}
+.mark{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-weight:800;flex:none}
+.mark.ok{background:var(--ok-soft);color:var(--ok)} .mark.bad{background:var(--bad-soft);color:var(--bad)}
+.pmsg{font-size:.88rem;color:var(--warn)}
+.preview{font-size:.85rem;color:var(--muted);font-family:var(--f-math);min-height:1.2em;overflow-wrap:anywhere}
+.opts{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.opt{border:1.5px solid var(--line);background:var(--paper);border-radius:10px;padding:10px 12px;text-align:left;font-family:var(--f-math);font-size:1.05rem;min-height:44px}
+.opt:hover{border-color:var(--accent)}
+.opt.sel{border-color:var(--accent);background:var(--accent-soft);font-weight:600}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.keys{display:flex;flex-wrap:wrap;gap:6px}
+.key{min-width:40px;height:38px;padding:0 10px;border-radius:8px;border:1.5px solid var(--line);background:var(--paper);font-family:var(--f-math);font-size:1.05rem}
+.key:hover{border-color:var(--accent)}
+.key.word{font-family:var(--f-body);font-size:.85rem;font-weight:700}
+.actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.actions .spacer{flex:1}
+.fb{border-radius:12px;padding:14px 16px;display:grid;gap:8px}
+.fb.ok{background:var(--ok-soft);border:1.5px solid var(--ok)}
+.fb.bad{background:var(--bad-soft);border:1.5px solid var(--bad)}
+.fb.info{background:var(--accent-soft);border:1.5px solid var(--accent)}
+.fb .head{font-family:var(--f-display);font-weight:800;font-size:1.15rem}
+.fb.ok .head{color:var(--ok)} .fb.bad .head{color:var(--bad)}
+.fb .ans{font-family:var(--f-math);font-size:1.15rem}
+.fb .why{color:var(--muted)}
+.fb .why b{color:var(--ink)}
+.help{font-size:.85rem;color:var(--muted)}
+.help code{font-family:var(--f-math);background:var(--accent-soft);padding:0 5px;border-radius:5px;color:var(--ink)}
+
+/* summary */
+.score{font-family:var(--f-display);font-weight:800;font-size:clamp(3rem,10vw,4.6rem);line-height:1;font-variant-numeric:tabular-nums}
+.misslist{display:grid;gap:8px;padding:0;margin:0;list-style:none}
+.misslist li{border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;display:grid;gap:2px}
+.misslist .q{font-family:var(--f-math)}
+
+/* cheat */
+.cheat{columns:2 340px;column-gap:28px}
+.cheat section{break-inside:avoid;margin-bottom:22px;background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:14px 16px}
+.cheat h3{margin-bottom:8px;color:var(--accent)}
+.cheat ul{margin:0;padding-left:18px;display:grid;gap:4px;font-size:.95rem}
+.cheat li .math,.cheat li{overflow-wrap:anywhere}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(18px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:10px;font-weight:700;z-index:20}
+.confirm{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--warn-soft);border:1.5px solid var(--warn);border-radius:10px;padding:10px 12px}
+[hidden]{display:none!important}
+body{margin:0}
+.toast{bottom:calc(76px + env(safe-area-inset-bottom,0px))}
+
+/* study timer */
+.timer{position:fixed;right:calc(14px + env(safe-area-inset-right,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:15;display:flex;align-items:center;gap:8px;background:var(--card);border:1.5px solid var(--line);border-radius:99px;padding:7px 15px 7px 11px;font-weight:700;font-variant-numeric:tabular-nums;box-shadow:0 8px 22px -10px rgba(20,30,70,.45);font-size:.92rem}
+.timer .tdot{width:9px;height:9px;border-radius:50%;background:var(--ok);animation:pulse 1.6s infinite}
+.timer.paused .tdot{background:var(--muted);animation:none}
+.timer small{color:var(--muted);font-weight:400}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--ok) 55%,transparent)}100%{box-shadow:0 0 0 9px transparent}}
+
+/* motion */
+@keyframes pop{from{transform:scale(.97);opacity:.6}to{transform:none;opacity:1}}
+@keyframes rise{from{transform:translateY(14px);opacity:.3}to{transform:none;opacity:1}}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes shake{10%,90%{transform:translateX(-2px)}20%,80%{transform:translateX(4px)}30%,50%,70%{transform:translateX(-8px)}40%,60%{transform:translateX(8px)}}
+@keyframes popin{0%{transform:scale(.4);opacity:0}65%{transform:scale(1.2);opacity:1}100%{transform:scale(1)}}
+@keyframes swipe{to{background-size:100% 40%}}
+@keyframes wiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}}
+.fb{animation:pop .2s ease-out}
+.fb.ok .head{display:inline-block;animation:popin .45s cubic-bezier(.2,.8,.2,1)}
+.card.enter{animation:rise .4s cubic-bezier(.2,.8,.2,1)}
+.card.shake{animation:shake .45s}
+.sess{animation:rise .5s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0) * 45ms);transition:transform .18s,box-shadow .18s,border-color .18s}
+.sess:hover{transform:translateY(-3px);box-shadow:0 12px 26px -16px rgba(30,50,130,.55)}
+.bar i{transform-origin:left;animation:grow .8s cubic-bezier(.2,.8,.2,1) both}
+.mark{animation:popin .35s cubic-bezier(.2,.8,.2,1)}
+.btn{transition:transform .1s,filter .15s,border-color .15s,background .15s}
+.btn:active{transform:scale(.95)}
+.opt,.key{transition:transform .1s,border-color .15s,background .15s}
+.opt:active,.key:active,.key.tap{transform:scale(.92);border-color:var(--accent)}
+.hl{background:linear-gradient(var(--hl),var(--hl)) no-repeat 0 88%/0% 40%;animation:swipe .9s .25s cubic-bezier(.2,.8,.2,1) forwards;padding-inline:2px}
+.streak{display:inline-flex;align-items:center;gap:6px;background:var(--warn-soft);color:var(--warn);border-radius:99px;padding:3px 12px 3px 9px;font-weight:800;font-size:.85rem;animation:popin .4s cubic-bezier(.2,.8,.2,1);width:max-content}
+.streak svg{animation:wiggle .9s ease-in-out infinite}
+#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:30}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.hl{background-size:100% 40%}}
+
+/* phones and touch */
+button,.inp{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+@media (hover:none){.sess:hover{transform:none;box-shadow:none;border-color:var(--line)}.btn:hover,.opt:hover,.key:hover{border-color:var(--line)}.btn.primary:hover{border-color:var(--accent)}}
+@media (max-width:560px){
+  body{font-size:16px}
+  .dots{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding:3px 2px 6px;margin-inline:-2px;scroll-snap-type:x proximity}
+  .dots::-webkit-scrollbar{display:none}
+  .dot{flex:none}
+  .keys{display:grid;grid-template-columns:repeat(6,1fr)}
+  .key{min-width:0;height:44px;padding:0}
+  .key.word{grid-column:span 3}
+  .actions .btn{flex:1 1 auto;justify-content:center}
+  .actions .spacer{display:none}
+  .trow{grid-template-columns:minmax(0,1fr) 52px;row-gap:4px}
+  .trow>span:first-child{grid-column:1/-1}
+  .card{border-radius:14px}
+  .timer{padding:5px 12px 5px 9px;font-size:.85rem}
+  .stats b{font-size:1.35rem}
+  .opts{grid-template-columns:1fr}
+}
+</style>
+
+<div class="wrap" id="app"></div>
+<div class="toast" id="toast" hidden></div>
+<div class="timer" id="timer" title="Time studied. Pauses when you're away for 2 minutes."><span class="tdot"></span><span id="tnow">0:00</span><small>today</small></div>
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<script>
+/* ================= CONTENT (from "Algebra 1 Honors Final: 5-Day Study Plan") ================= */
+const N=(a,o={})=>({t:'num',a,...o}), S=(a,o={})=>({t:'set',a,...o}), P=(a,o={})=>({t:'pt',a,...o}),
+      E=(a,o={})=>({t:'expr',a,...o}), L=(a,o={})=>({t:'line',a,...o}), I=(a,o={})=>({t:'ineq',a,...o}),
+      C=(opts,a,o={})=>({t:'choice',opts,a,...o}), M=(opts,a,o={})=>({t:'multi',opts,a,...o}),
+      T=(re,o={})=>({t:'text',re,...o}), SELF=(o={})=>({t:'self',...o});
+const YN=['Yes','No'], TF=['True','False'];
+const SHADE=['Dashed line, shade above','Solid line, shade above','Dashed line, shade below','Solid line, shade below'];
+const NT=['Natural','Whole','Integer','Rational','Irrational'];
+
+const SESSIONS=[
+{id:'day-1',tag:'Day 1',title:'Expressions and solving equations',ideas:[
+ 'Order to solve: distribute, combine like terms on each side, move variables to one side, then undo + and − before × and ÷.',
+ 'Fractions: multiply every term by the denominator first to clear them.',
+ 'A false statement at the end (like 5 = 3) means no solution. A true one (like 4 = 4) means infinitely many solutions.',
+ 'Literal equations: solve for the named letter exactly like a number problem, treating the other letters as numbers.'],
+ probs:[
+ {q:'Solve: 3(x − 4) + 2 = 2x + 5',p:[N(15,{label:'x ='})],ans:'x = 15',why:'3x − 10 = 2x + 5'},
+ {q:'Solve: (2/3)x − 5 = 7',p:[N(18,{label:'x ='})],ans:'x = 18',why:'(2/3)x = 12, then multiply by 3/2'},
+ {q:'Solve: 4(2x + 1) = 8x + 4',p:[N('all',{label:'x ='})],ans:'Infinitely many solutions',why:'8x + 4 = 8x + 4 is always true'},
+ {q:'Solve: 5x − 2(x + 3) = 3x + 1',p:[N('none',{label:'x ='})],ans:'No solution',why:'3x − 6 = 3x + 1 gives −6 = 1, which is false'},
+ {q:'Solve: 0.4(x + 5) = 0.2x + 3',p:[N(5,{label:'x ='})],ans:'x = 5',why:'0.4x + 2 = 0.2x + 3, so 0.2x = 1'},
+ {q:'Solve 3x + 2y = 10 for y.',p:[E('5-(3/2)*x',{label:'y ='})],ans:'y = 5 − (3/2)x',why:'2y = 10 − 3x, then divide everything by 2'},
+ {q:'Solve A = ½bh for h.',p:[E('2*A/b',{label:'h ='})],ans:'h = 2A / b',why:'Multiply both sides by 2, then divide by b'},
+ {q:'Gym A costs $40 to sign up plus $20 a month. Gym B costs $10 to sign up plus $25 a month. After how many months do they cost the same?',p:[N(6,{label:'Months'})],ans:'6 months',why:'40 + 20m = 10 + 25m'}]},
+{id:'day-2',tag:'Day 2',title:'Inequalities and absolute value',ideas:[
+ 'Solve inequalities like equations, but flip the sign whenever you multiply or divide by a negative.',
+ 'Open circle for < and >, closed circle for ≤ and ≥.',
+ '"And" compound inequalities give one piece between two numbers. "Or" gives two pieces going opposite ways.',
+ 'Absolute value: isolate the bars first. Then |stuff| = a splits into stuff = a or stuff = −a.',
+ '|stuff| < a becomes −a < stuff < a ("less thAND"). |stuff| > a becomes stuff < −a or stuff > a ("greatOR").',
+ 'If the bars equal a negative number, there is no solution.'],
+ probs:[
+ {q:'Solve: −3x + 7 > 19',p:[I('x < -4')],ans:'x < −4',why:'−3x > 12. The sign flips when you divide by −3.'},
+ {q:'Solve: 2(x − 1) ≤ 5x + 7',p:[I('x >= -3')],ans:'x ≥ −3',why:'2x − 2 ≤ 5x + 7 → −9 ≤ 3x → x ≥ −3'},
+ {q:'Solve: −2 < 3x + 4 ≤ 13',p:[I('-2 < x and x <= 3')],ans:'−2 < x ≤ 3',why:'Subtract 4 from all three parts, then divide all three by 3'},
+ {q:'Solve: x − 3 < −5 or 2x > 8',p:[I('x < -2 or x > 4')],ans:'x < −2 or x > 4',why:'Solve each piece on its own'},
+ {q:'Solve: |2x − 5| = 9',p:[S([7,-2])],ans:'x = 7 or x = −2',why:'2x − 5 = 9 or 2x − 5 = −9'},
+ {q:'Solve: 3|x + 1| − 4 = 8',p:[S([3,-5])],ans:'x = 3 or x = −5',why:'Isolate the bars first: |x + 1| = 4'},
+ {q:'Solve: |x − 4| < 6',p:[I('-2 < x and x < 10')],ans:'−2 < x < 10',why:'Less thAND: −6 < x − 4 < 6'},
+ {q:'Solve: |3x| + 5 ≥ 11',p:[I('x <= -2 or x >= 2')],ans:'x ≤ −2 or x ≥ 2',why:'|3x| ≥ 6, greatOR: 3x ≤ −6 or 3x ≥ 6'},
+ {q:'Solve: |x + 2| = −3',p:[S('none')],ans:'No solution',why:'Absolute value can never be negative'},
+ {q:'You need at least $300 for a trip. You have $80 and earn $12 an hour. What is the fewest whole hours you need to work?',p:[N(19,{label:'Hours'})],ans:'19 hours',why:'80 + 12h ≥ 300 gives h ≥ 18.3, so round up to 19'}]},
+{id:'day-3',tag:'Day 3',title:'Functions and linear equations',ideas:[
+ 'A function gives each input exactly one output. On a graph, use the vertical line test.',
+ 'Domain = all possible inputs (x). Range = all possible outputs (y).',
+ 'f(3) means plug 3 in for x.',
+ 'Slope m = (y₂ − y₁) / (x₂ − x₁), "rise over run."',
+ 'Three forms: slope-intercept y = mx + b, point-slope y − y₁ = m(x − x₁), standard Ax + By = C.',
+ 'Parallel lines have the same slope. Perpendicular slopes are negative reciprocals (2 and −½).',
+ 'Horizontal line y = c has slope 0. Vertical line x = c has undefined slope.',
+ 'In word problems, slope is the rate (per hour, per item) and b is the starting amount.'],
+ probs:[
+ {q:'Is {(1, 2), (3, 4), (1, 5)} a function? Why?',p:[C(['Yes, every point is different','No, the input 1 has two outputs (2 and 5)','Yes, there are three inputs','No, the outputs aren’t in order'],1)],ans:'No. The input 1 has two outputs, 2 and 5.',why:'A function gives each input exactly one output'},
+ {q:'If f(x) = 2x² − 3x + 1, find f(−2).',p:[N(15,{label:'f(−2) ='})],ans:'15',why:'2(4) − 3(−2) + 1 = 8 + 6 + 1'},
+ {q:'Find the slope through (−2, 5) and (4, −7).',p:[N(-2,{label:'m ='})],ans:'m = −2',why:'(−7 − 5) ÷ (4 − (−2)) = −12 ÷ 6'},
+ {q:'Write the line with slope 2/3 through (3, −1) in slope-intercept form.',p:[L('(2/3)*x-3')],ans:'y = (2/3)x − 3',why:'−1 = (2/3)(3) + b gives b = −3'},
+ {q:'Write the line through (1, 4) and (3, 10) in slope-intercept form.',p:[L('3*x+1')],ans:'y = 3x + 1',why:'m = 6/2 = 3, then 4 = 3(1) + b'},
+ {q:'Rewrite 4x − 2y = 8 in slope-intercept form, and give both intercepts.',p:[L('2*x-4',{label:'Slope-intercept form'}),P([2,0],{label:'x-intercept'}),P([0,-4],{label:'y-intercept'})],ans:'y = 2x − 4; x-intercept (2, 0), y-intercept (0, −4)',why:'−2y = −4x + 8, divide by −2'},
+ {q:'Write the line parallel to y = −3x + 2 through (2, 1).',p:[L('-3*x+7')],ans:'y = −3x + 7',why:'Same slope −3: 1 = −3(2) + b'},
+ {q:'Write the line perpendicular to y = ½x − 4 through (−1, 3).',p:[L('-2*x+1')],ans:'y = −2x + 1',why:'Negative reciprocal of ½ is −2: 3 = −2(−1) + b'},
+ {q:'A plumber charges $50 plus $30 an hour. Write C(h), find C(4), and say what the slope means.',p:[E('30*h+50',{label:'C(h) ='}),N(170,{label:'C(4) = $'}),C(['$30 per hour','$50 to start','$170 in total','4 hours of work'],0,{label:'The slope means'})],ans:'C(h) = 30h + 50; C(4) = $170; the slope means $30 per hour',why:'Slope is the rate, b is the starting amount'},
+ {q:'What is the slope of x = 5?',p:[C(['0','Undefined','5','1/5'],1)],ans:'Undefined (vertical line)',why:'x = c is a vertical line'}]},
+{id:'day-4',tag:'Day 4',title:'Systems of equations and inequalities',ideas:[
+ 'The solution of a system is the point where the lines cross, written (x, y). Always check it in both equations.',
+ 'Substitution: best when a variable is already alone (y = …). Plug it into the other equation.',
+ 'Elimination: line up x’s and y’s, multiply so one variable has opposite coefficients, then add the equations.',
+ 'Ending with 0 = 5 (false) means parallel lines, so no solution. Ending with 0 = 0 means the same line, so infinitely many.',
+ 'Systems of inequalities: graph each line (dashed for < or >, solid for ≤ or ≥), shade each, and the overlap is the solution.'],
+ probs:[
+ {q:'Solve the system: y = 2x − 1 and 3x + y = 9',p:[P([2,3])],ans:'(2, 3)',why:'Substitute: 3x + 2x − 1 = 9'},
+ {q:'Solve the system: x + y = 10 and x − y = 4',p:[P([7,3])],ans:'(7, 3)',why:'Add the equations: 2x = 14'},
+ {q:'Solve the system: 3x + 2y = 16 and 2x − 3y = −11',p:[P([2,5])],ans:'(2, 5)',why:'Multiply by 3 and by 2, then add: 13x = 26'},
+ {q:'Solve the system: 2x + 4y = 12 and x + 2y = 6',p:[P('all')],ans:'Infinitely many solutions',why:'The first equation is just 2 times the second, so it’s the same line'},
+ {q:'Solve the system: y = 3x + 2 and y = 3x − 5',p:[P('none')],ans:'No solution',why:'Same slope, different intercepts: parallel lines'},
+ {q:'A show sold 200 tickets for $1,300. Adult tickets cost $8 and student tickets cost $5. How many of each were sold?',p:[N(100,{label:'Adult tickets'}),N(100,{label:'Student tickets'})],ans:'100 adult and 100 student tickets',why:'a + s = 200 and 8a + 5s = 1300'},
+ {q:'Two burgers and three fries cost $19. Four burgers and one fries cost $23. Find the price of each.',p:[N(5,{label:'Burger $'}),N(3,{label:'Fries $'})],ans:'Burger $5, fries $3',why:'2b + 3f = 19 and 4b + f = 23'},
+ {q:'Is (1, 2) a solution to y > x and y ≤ −x + 4? Describe how each line is drawn and shaded.',p:[C(YN,0,{label:'Is (1, 2) a solution?'}),C(SHADE,0,{label:'y > x'}),C(SHADE,3,{label:'y ≤ −x + 4'})],ans:'Yes: 2 > 1 and 2 ≤ 3. y > x is dashed, shaded above. y ≤ −x + 4 is solid, shaded below.',why:'< or > → dashed; ≤ or ≥ → solid. y > … shades above, y < … shades below'}]},
+{id:'day-5',tag:'Day 5',title:'Exponents, exponential functions, and mixed review',note:'Start with your missed problems from Days 1–4, then do this set.',ideas:[
+ 'Multiply same base: add exponents. Divide: subtract. Power to a power: multiply.',
+ 'Anything to the 0 power is 1. A negative exponent flips it: x⁻³ = 1/x³.',
+ 'Fraction exponents are roots: x^(1/3) is the cube root of x. For x^(3/4), take the 4th root, then cube it.',
+ 'Exponential function: y = a·bˣ. If b > 1 it grows; if 0 < b < 1 it decays.',
+ 'Growth: y = a(1 + r)ᵗ. Decay: y = a(1 − r)ᵗ, with r as a decimal.',
+ 'Linear tables add the same amount each step. Exponential tables multiply by the same amount.'],
+ probs:[
+ {q:'Simplify: (3x²y³)(4x⁵y)',p:[E('12*x^7*y^4',{form:'simp'})],ans:'12x⁷y⁴',why:'Multiply 3 · 4, then add exponents: x²⁺⁵, y³⁺¹'},
+ {q:'Simplify: (2a³)⁴',p:[E('16*a^12',{form:'simp'})],ans:'16a¹²',why:'2⁴ = 16 and (a³)⁴ = a¹²'},
+ {q:'Simplify: 12x⁸ ÷ 4x³',p:[E('3*x^5',{form:'simp'})],ans:'3x⁵',why:'12 ÷ 4 = 3, subtract exponents 8 − 3'},
+ {q:'Simplify: x⁻³ · x⁵',p:[E('x^2',{form:'simp'})],ans:'x²',why:'Add exponents: −3 + 5 = 2'},
+ {q:'Simplify: (5m⁻²n⁴)⁰',p:[N(1)],ans:'1',why:'Anything to the 0 power is 1'},
+ {q:'Evaluate 27^(1/3) and 16^(3/4).',p:[N(3,{label:'27^(1/3) ='}),N(8,{label:'16^(3/4) ='})],ans:'3 and 8',why:'Cube root of 27 is 3. Fourth root of 16 is 2, and 2³ = 8.'},
+ {q:'$500 earns 6% a year. Write the function and find the value after 3 years.',p:[E('500*(1.06)^t',{label:'y =',ph:'use t for years'}),N(595.51,{label:'Value after 3 years: $',tol:0.02})],ans:'y = 500(1.06)ᵗ; about $595.51',why:'Growth: a(1 + r)ᵗ with r = 0.06'},
+ {q:'A $20,000 car loses 15% of its value each year. Write the function and find its value after 2 years.',p:[E('20000*(0.85)^t',{label:'y =',ph:'use t for years'}),N(14450,{label:'Value after 2 years: $',tol:0.5})],ans:'y = 20,000(0.85)ᵗ; $14,450',why:'Decay: a(1 − r)ᵗ with r = 0.15'},
+ {q:'Is this linear or exponential? x: 0, 1, 2, 3 and y: 3, 6, 12, 24. Write the equation.',p:[C(['Linear','Exponential'],1),E('3*2^x',{label:'y ='})],ans:'Exponential (multiplies by 2 each step); y = 3 · 2ˣ',why:'Start a = 3, multiply by b = 2 each step'},
+ {q:'Mixed review (Day 1). Solve: 7 − 2(x + 3) = 3x − 9',p:[N(2,{label:'x ='})],ans:'x = 2',why:'1 − 2x = 3x − 9 → 10 = 5x'},
+ {q:'Mixed review (Day 2). Solve: |x − 1| ≥ 3',p:[I('x <= -2 or x >= 4')],ans:'x ≤ −2 or x ≥ 4',why:'GreatOR: x − 1 ≤ −3 or x − 1 ≥ 3'},
+ {q:'Mixed review (Day 3). Write the line through (0, −2) and (4, 6).',p:[L('2*x-2')],ans:'y = 2x − 2',why:'m = 8/4 = 2 and the y-intercept is −2'},
+ {q:'Mixed review (Day 4). Solve the system: y = x + 4 and 2x + y = 1',p:[P([-1,3])],ans:'(−1, 3)',why:'2x + x + 4 = 1 → 3x = −3'},
+ {q:'Mixed review (Day 5). Simplify: (x³)² · x⁻⁴',p:[E('x^2',{form:'simp'})],ans:'x²',why:'x⁶ · x⁻⁴ = x²'}]},
+{id:'day-6',tag:'Day 6',title:'Coordinate geometry',ideas:[
+ 'Distance: d = √((x₂ − x₁)² + (y₂ − y₁)²). It’s the Pythagorean theorem on a graph.',
+ 'Midpoint: ((x₁ + x₂)/2, (y₁ + y₂)/2), the average of the x’s and the average of the y’s.',
+ 'Missing endpoint: double the midpoint and subtract the known endpoint (B = 2M − A, for x and y separately).',
+ 'Moving along a slope: slope 3/4 means 4 right and 3 up, which covers 5 units (a 3-4-5 triangle). Scale up for longer distances.',
+ 'Triangles: use distance to classify by sides (equal sides = isosceles, all equal = equilateral). Slopes that are negative reciprocals mean a right angle.',
+ 'Parallelogram: both pairs of opposite sides have equal slopes.',
+ 'Point-slope y − y₁ = m(x − x₁) converts to slope-intercept by distributing and solving for y. For standard form Ax + By = C, clear fractions, put x and y on the left, and make A positive.'],
+ probs:[
+ {q:'Find the distance between (−2, 3) and (4, −5).',p:[N(10,{label:'d ='})],ans:'10',why:'√(6² + 8²) = √(36 + 64) = √100'},
+ {q:'Find the midpoint of (−2, 3) and (4, −5).',p:[P([1,-1])],ans:'(1, −1)',why:'((−2 + 4)/2, (3 + (−5))/2)'},
+ {q:'M(3, −1) is the midpoint of AB, and A is (−1, 4). Find B.',p:[P([7,-6],{label:'B ='})],ans:'B(7, −6)',why:'2(3) − (−1) = 7 and 2(−1) − 4 = −6'},
+ {q:'Find the distance between (−1, 2) and (3, 4). Simplify the radical.',p:[E('2*sqrt(5)',{form:'radical',label:'d ='})],ans:'2√5',why:'√(4² + 2²) = √20 = √4 · √5'},
+ {q:'Rewrite y − 2 = ½(x − 3) in slope-intercept form and in standard form.',p:[L('x/2+1/2',{label:'Slope-intercept form'}),L('x/2+1/2',{label:'Standard form',form:'std',ph:'like Ax + By = C'})],ans:'y = ½x + ½; standard form x − 2y = −1',why:'Distribute: y − 2 = ½x − 3/2. For standard form multiply by 2: 2y = x + 1, then move x left and make A positive.'},
+ {q:'Write the line through (−4, 1) with slope −2/3 in point-slope form and in standard form.',p:[L('-(2/3)*x-5/3',{label:'Point-slope form',ph:'like y − y₁ = m(x − x₁)'}),L('-(2/3)*x-5/3',{label:'Standard form',form:'std',ph:'like Ax + By = C'})],ans:'y − 1 = −(2/3)(x + 4); standard form 2x + 3y = −5',why:'Multiply by 3: 3y − 3 = −2x − 8, then move x left'},
+ {q:'Triangle A(0, 0), B(4, 0), C(0, 3). Find each side length, classify the triangle, and find the perimeter.',p:[N(4,{label:'AB ='}),N(3,{label:'AC ='}),N(5,{label:'BC ='}),C(['Right scalene','Right isosceles','Equilateral','Acute isosceles'],0,{label:'Type of triangle'}),N(12,{label:'Perimeter ='})],ans:'AB = 4, AC = 3, BC = 5. It’s a right scalene triangle. Perimeter is 12.',why:'AB is horizontal and AC is vertical, so they meet at a right angle'},
+ {q:'Triangle P(1, 1), Q(4, 5), R(7, 1). Classify it by its sides and find its area.',p:[C(['Scalene','Isosceles','Equilateral'],1,{label:'By its sides'}),N(12,{label:'Area ='})],ans:'PQ = 5, QR = 5, PR = 6, so it’s isosceles. Area = ½ · 6 · 4 = 12.',why:'Base PR is 6 long and the height from Q is 4'},
+ {q:'Is A(0, 0), B(5, 1), C(7, 4), D(2, 3) a parallelogram? Show the slopes.',p:[N(0.2,{label:'Slope of AB (and DC)'}),N(1.5,{label:'Slope of BC (and AD)'}),C(YN,0,{label:'Parallelogram?'})],ans:'Yes. AB and DC both have slope 1/5; BC and AD both have slope 3/2.',why:'Both pairs of opposite sides are parallel'},
+ {q:'Start at (1, 2) and move 10 units to the right along a line with slope 3/4. Where do you land?',note:'Here "10 units" means 10 units of distance along the line.',p:[P([9,8])],ans:'(9, 8)',why:'Each 5 units is 4 right and 3 up, so do that twice'},
+ {q:'Is the line through (1, 2) and (3, 6) parallel, perpendicular, or neither to the line through (0, 0) and (4, −2)?',p:[C(['Parallel','Perpendicular','Neither'],1)],ans:'Perpendicular (slopes 2 and −½)',why:'2 and −½ are negative reciprocals'}]},
+{id:'day-7',tag:'Day 7',title:'GCF, LCM and divisibility conjectures',ideas:[
+ 'Start with prime factorization (factor trees).',
+ 'GCF: take only the primes both numbers share, using the lowest power. LCM: take every prime, using the highest power.',
+ 'Check: GCF × LCM = the two numbers multiplied together.',
+ 'Same idea with variables. The GCF of x³ and x² is x²; the LCM is x³.',
+ 'Word problems: "split into equal groups, as many as possible" means GCF. "When will they happen together again" means LCM.',
+ 'Divisibility rules: 2 (last digit even), 3 (digit sum divisible by 3), 4 (last two digits), 5 (ends in 0 or 5), 6 (divisible by 2 and 3), 9 (digit sum divisible by 9), 10 (ends in 0).',
+ 'Conjectures: one counterexample proves a conjecture false. Examples alone never prove it true; you need algebra. Write an even number as 2n, an odd as 2n + 1, and consecutive integers as n, n + 1, n + 2.'],
+ probs:[
+ {q:'Find the GCF and LCM of 36 and 60.',p:[N(12,{label:'GCF ='}),N(180,{label:'LCM ='})],ans:'GCF 12, LCM 180',why:'36 = 2²·3², 60 = 2²·3·5'},
+ {q:'Find the GCF and LCM of 24, 40 and 56.',p:[N(8,{label:'GCF ='}),N(840,{label:'LCM ='})],ans:'GCF 8, LCM 840',why:'24 = 2³·3, 40 = 2³·5, 56 = 2³·7'},
+ {q:'Find the GCF and LCM of 12x³y and 18x²y⁴.',p:[E('6*x^2*y',{label:'GCF =',form:'simp'}),E('36*x^3*y^4',{label:'LCM =',form:'simp'})],ans:'GCF 6x²y, LCM 36x³y⁴',why:'Lowest powers for GCF, highest for LCM'},
+ {q:'Factor out the GCF: 15a²b − 25ab²',p:[E('5*a*b*(3*a-5*b)',{form:'factor'})],ans:'5ab(3a − 5b)',why:'The GCF of 15a²b and 25ab² is 5ab'},
+ {q:'A bus leaves every 12 minutes and a train every 18 minutes. Both leave at 8:00. When do they next leave together?',p:[T(/^\s*8\s*[:.]\s*36\b/i,{label:'Time',ph:'like 8:15'})],ans:'8:36',why:'The LCM of 12 and 18 is 36 minutes'},
+ {q:'You have 48 pencils and 36 erasers. What is the most identical kits you can make with nothing left over, and what goes in each?',p:[N(12,{label:'Number of kits'}),N(4,{label:'Pencils per kit'}),N(3,{label:'Erasers per kit'})],ans:'12 kits, each with 4 pencils and 3 erasers',why:'The GCF of 48 and 36 is 12'},
+ {q:'Is 7,452 divisible by 3? By 4? By 9?',p:[C(YN,0,{label:'By 3?'}),C(YN,0,{label:'By 4?'}),C(YN,0,{label:'By 9?'})],ans:'Yes for all three',why:'The digit sum is 18, which works for 3 and 9, and 52 is divisible by 4'},
+ {q:'Prove: the sum of any three consecutive integers is divisible by 3.',p:[SELF()],ans:'n + (n + 1) + (n + 2) = 3n + 3 = 3(n + 1), a multiple of 3.',why:'Write consecutive integers as n, n + 1, n + 2'},
+ {q:'True or false: the sum of two odd numbers is odd. Prove it or give a counterexample.',p:[C(TF,1)],ans:'False. Counterexample: 3 + 5 = 8.',why:'In general (2a + 1) + (2b + 1) = 2(a + b + 1), which is always even'},
+ {q:'Prove: n² + n is always even.',p:[SELF()],ans:'n² + n = n(n + 1). One of two consecutive integers is always even, so the product is even.',why:'Factor first, then think about consecutive integers'},
+ {q:'True or false: every number divisible by 6 is divisible by 12.',p:[C(TF,1)],ans:'False. Counterexample: 18 is divisible by 6 but not 12.',why:'One counterexample disproves a conjecture'}]},
+{id:'day-8',tag:'Day 8',title:'Radicals and rational expressions',ideas:[
+ 'Simplify a square root by pulling out the biggest perfect square: √72 = √36 · √2 = 6√2.',
+ 'Multiply radicals by multiplying outside numbers together and inside numbers together: a√b · c√d = ac√(bd). Then simplify.',
+ 'Add or subtract only like radicals (same number inside), so simplify first: 2√3 + 5√3 = 7√3.',
+ 'Variables under a root: pull out pairs. √(x⁷) = x³√x (assume variables are positive).',
+ 'Rationalize: no radical in the denominator. Multiply top and bottom by that radical.',
+ '(a + √b)(a − √b) = a² − b, so the radicals cancel.',
+ 'Rational expressions: factor the top and bottom completely, then cancel common factors, never terms. List excluded values (anything that makes the original denominator 0).',
+ 'Multiply: factor, cancel, multiply. Divide: flip the second fraction, then multiply.',
+ 'Exponents in fractions: subtract exponents and keep the leftover where the bigger power was. Negative exponents move across the fraction bar.'],
+ probs:[
+ {q:'Simplify: √72',p:[E('6*sqrt(2)',{form:'radical'})],ans:'6√2',why:'√36 · √2'},
+ {q:'Simplify: √50 + 3√8',p:[E('11*sqrt(2)',{form:'radical'})],ans:'11√2',why:'5√2 + 6√2'},
+ {q:'Simplify: 2√6 · 5√3',p:[E('30*sqrt(2)',{form:'radical'})],ans:'30√2',why:'10√18 = 10 · 3√2'},
+ {q:'Simplify: √(48x⁵y²)',p:[E('4*x^2*y*sqrt(3*x)',{form:'radical'})],ans:'4x²y√(3x)',why:'√16 · √3, x⁵ = x⁴ · x, and y² comes out as y'},
+ {q:'Simplify: (3 + √2)(3 − √2)',p:[N(7,{plain:true})],ans:'7',why:'a² − b = 9 − 2'},
+ {q:'Rationalize: 6/√3',p:[E('2*sqrt(3)',{form:'radical'})],ans:'2√3',why:'6√3 / 3'},
+ {q:'Simplify: x⁵y² / x²y⁶',p:[E('x^3/y^4',{form:'simp'})],ans:'x³ / y⁴',why:'x⁵⁻² stays on top; y⁶⁻² goes to the bottom'},
+ {q:'Simplify (4x + 8)/(x² + 2x). State the excluded values.',p:[E('4/x',{form:'simp'}),S([0,-2],{label:'Excluded values: x ≠',ph:'like 1, -4'})],ans:'4/x, with x ≠ 0 and x ≠ −2',why:'4(x + 2) / x(x + 2). Excluded values come from the original denominator.'},
+ {q:'Simplify (x² − 9)/(x + 3). State the excluded value.',p:[E('x-3',{form:'nopow'}),S([-3],{label:'Excluded value: x ≠'})],ans:'x − 3, with x ≠ −3',why:'(x + 3)(x − 3) / (x + 3)'},
+ {q:'Simplify: (6x² / 5y) · (10y³ / 3x)',p:[E('4*x*y^2',{form:'simp'})],ans:'4xy²',why:'60x²y³ / 15xy'},
+ {q:'Simplify: (8a³ / b²) ÷ (2a / b⁵)',p:[E('4*a^2*b^3',{form:'simp'})],ans:'4a²b³',why:'Flip the second fraction: (8a³ / b²) · (b⁵ / 2a)'},
+ {q:'Simplify (2x⁻²y³)⁻², with positive exponents only.',p:[E('x^4/(4*y^6)',{form:'simp'})],ans:'x⁴ / (4y⁶)',why:'2⁻²x⁴y⁻⁶, then move the negative exponents to the bottom'}]},
+{id:'day-9',tag:'Day 9',title:'Number types, polynomials and factoring',ideas:[
+ 'Number types: natural (1, 2, 3…) ⊂ whole (0, 1, 2…) ⊂ integers (…−1, 0, 1…) ⊂ rational (any fraction of integers, including terminating or repeating decimals). Irrational numbers never end or repeat (√2, π).',
+ 'Polynomials go in standard form, highest power first. The degree is the highest power.',
+ 'Subtracting a polynomial: distribute the minus to every term first.',
+ 'Multiplying: every term times every term (FOIL for two binomials).',
+ 'Special products: (a + b)² = a² + 2ab + b², (a − b)² = a² − 2ab + b², and (a + b)(a − b) = a² − b².',
+ 'Factoring order: (1) GCF first. (2) Two terms: difference of squares. (3) x² + bx + c: two numbers that multiply to c and add to b. (4) ax² + bx + c: AC method. (5) Four terms: grouping.',
+ 'Check every factoring answer by multiplying it back out.'],
+ probs:[
+ {q:'Classify each number: −7, 0, 2/3, √16, √5, 0.333…, π',note:'Check every set each number belongs to.',p:[M(NT,[2,3],{label:'−7'}),M(NT,[1,2,3],{label:'0'}),M(NT,[3],{label:'2/3'}),M(NT,[0,1,2,3],{label:'√16'}),M(NT,[4],{label:'√5'}),M(NT,[3],{label:'0.333…'}),M(NT,[4],{label:'π'})],ans:'−7: integer, rational. 0: whole, integer, rational. 2/3: rational. √16 = 4: natural, whole, integer, rational. √5: irrational. 0.333…: rational (it repeats). π: irrational.',why:'Simplify first: √16 = 4 is rational'},
+ {q:'Simplify: (3x² − 5x + 2) − (x² + 2x − 7)',p:[E('2*x^2-7*x+9',{form:'expanded'})],ans:'2x² − 7x + 9',why:'Distribute the minus to every term'},
+ {q:'Multiply: (2x + 3)(x − 4)',p:[E('2*x^2-5*x-12',{form:'expanded'})],ans:'2x² − 5x − 12',why:'2x² − 8x + 3x − 12'},
+ {q:'Multiply: (3x − 5)²',p:[E('9*x^2-30*x+25',{form:'expanded'})],ans:'9x² − 30x + 25',why:'(a − b)² = a² − 2ab + b²'},
+ {q:'Multiply: (x + 2)(x² − 3x + 1)',p:[E('x^3-x^2-5*x+2',{form:'expanded'})],ans:'x³ − x² − 5x + 2',why:'x³ − 3x² + x + 2x² − 6x + 2'},
+ {q:'Factor: x² + 7x + 12',p:[E('(x+3)*(x+4)',{form:'factor'})],ans:'(x + 3)(x + 4)',why:'3 · 4 = 12 and 3 + 4 = 7'},
+ {q:'Factor: x² − 2x − 15',p:[E('(x-5)*(x+3)',{form:'factor'})],ans:'(x − 5)(x + 3)',why:'−5 · 3 = −15 and −5 + 3 = −2'},
+ {q:'Factor: 4x² − 25',p:[E('(2*x+5)*(2*x-5)',{form:'factor'})],ans:'(2x + 5)(2x − 5)',why:'Difference of squares'},
+ {q:'Factor completely: 3x² + 12x − 36',p:[E('3*(x+6)*(x-2)',{form:'factor'})],ans:'3(x + 6)(x − 2)',why:'GCF first: 3(x² + 4x − 12)'},
+ {q:'Factor: 2x² + 7x + 3',p:[E('(2*x+1)*(x+3)',{form:'factor'})],ans:'(2x + 1)(x + 3)',why:'ac = 6 → 6 and 1 → 2x² + 6x + x + 3'},
+ {q:'Factor by grouping: x³ + 3x² + 2x + 6',p:[E('(x^2+2)*(x+3)',{form:'factor'})],ans:'(x² + 2)(x + 3)',why:'x²(x + 3) + 2(x + 3)'},
+ {q:'Simplify (x² − 9)/(x² + 5x + 6) and state the excluded values.',p:[E('(x-3)/(x+2)',{form:'nopow'}),S([-2,-3],{label:'Excluded values: x ≠',ph:'like 1, -4'})],ans:'(x − 3)/(x + 2), with x ≠ −2 and x ≠ −3',why:'(x + 3)(x − 3) / (x + 3)(x + 2)'}]},
+{id:'bonus',tag:'Bonus',title:'Big-number problems with algebra',note:'The fastest way through huge numbers is to never multiply them out.',ideas:[
+ 'Replace the big number with a variable. Let x = 2000, so 2001 = x + 1 and 4000 = 2x. Simplify the algebra, then plug back in.',
+ 'Watch for (n + 1) − n = 1. Those factors are just 1.',
+ 'Difference of squares: a² − b² = (a + b)(a − b). So 2001² − 2000² = (4001)(1).',
+ 'Near-squares: (n − 1)(n + 1) = n² − 1, and 99 × 101 = 100² − 1.'],
+ probs:[
+ {q:'[(2000 + 2001)(3001 − 3000)] ÷ [(4000 + 4001)(5001 − 5000)]',p:[N('4001/8001',{label:'Answer (a fraction is fine)'})],ans:'4001/8001',why:'Both differences equal 1, so you’re left with (2x + 1)/(4x + 1) with x = 2000'},
+ {q:'2001² − 2000²',p:[N(4001)],ans:'4001',why:'(2001 + 2000)(2001 − 2000)'},
+ {q:'(3001² − 3000²) ÷ (5001² − 5000²)',p:[N('6001/10001',{label:'Answer (a fraction is fine)'})],ans:'6001/10001',why:'Each difference of squares is (sum)(1)'},
+ {q:'99 × 101',p:[N(9999)],ans:'9,999',why:'100² − 1'},
+ {q:'1003 × 997',p:[N(999991)],ans:'999,991',why:'1000² − 3²'},
+ {q:'(2023 × 2025) − 2024²',p:[N(-1)],ans:'−1',why:'Let n = 2024: (n − 1)(n + 1) − n² = −1'},
+ {q:'2,000,001² − 1,999,999²',p:[N(8000000)],ans:'8,000,000',why:'(4,000,000)(2)'}]},
+{id:'reasoning',tag:'Extra',title:'Numerical and abstract reasoning',note:'These test how you think more than any one formula.',ideas:[
+ 'Draw a picture or diagram (the light problem is a circle).',
+ 'Make a table and look for a pattern, then write a rule for the nth term.',
+ 'Work backwards from the answer, undoing each step in reverse order.',
+ 'Solve a simpler problem first (small numbers), then scale up.',
+ 'Estimate and use scientific notation for huge or tiny numbers. Multiply the front numbers, add the exponents.',
+ 'Track units. Miles ÷ miles per trip = trips.',
+ 'Look for structure instead of solving: if 3x + 5 = 20, then 6x + 10 is just double.'],
+ probs:[
+ {q:'Light travels about 6 trillion miles in 1 year. Earth’s radius is about 4,000 miles. About how many times could light travel around Earth in 1 year?',note:'Hint: around means circumference. An estimate within 5% counts.',p:[N(238732414,{rel:0.05,label:'About',ph:'like 2.4e8 or 240 million'})],ans:'About 239 million times (2.4 × 10⁸)',why:'Circumference = 2π(4,000) ≈ 25,133 miles, and 6,000,000,000,000 ÷ 25,133 ≈ 238,700,000'},
+ {q:'(3 × 10⁵)(4 × 10⁸), in scientific notation',p:[N(1.2e14,{rel:1e-9,ph:'like 1.2 × 10^14'})],ans:'1.2 × 10¹⁴',why:'12 × 10¹³, then fix the front number'},
+ {q:'(8 × 10⁹) ÷ (2 × 10³)',p:[N(4e6,{rel:1e-9,ph:'like 4 × 10^6'})],ans:'4 × 10⁶',why:'8 ÷ 2 = 4, and 9 − 3 = 6'},
+ {q:'A heart beats about 70 times a minute. About how many times does it beat in a year? Give the answer in scientific notation.',p:[N(36792000,{rel:0.03,ph:'like 3.7 × 10^7'})],ans:'About 3.7 × 10⁷',why:'70 × 60 × 24 × 365 = 36,792,000'},
+ {q:'3, 7, 11, 15, … Write the rule for the nth term and find the 50th term.',p:[E('4*n-1',{label:'nth term =',ph:'use n'}),N(199,{label:'50th term ='})],ans:'nth term = 4n − 1; 50th term = 199',why:'Arithmetic: a₁ + (n − 1)d = 3 + 4(n − 1)'},
+ {q:'2, 6, 18, 54, … Find the next term and the rule.',p:[N(162,{label:'Next term ='}),E('2*3^(n-1)',{label:'nth term =',ph:'use n'})],ans:'162; nth term = 2 · 3ⁿ⁻¹',why:'Geometric: multiply by 3 each time'},
+ {q:'Find 1 + 2 + 3 + … + 100 without adding them one by one.',p:[N(5050)],ans:'5,050',why:'50 pairs that each add to 101'},
+ {q:'I doubled a number, subtracted 7, then divided by 3, and got 9. What was the number?',p:[N(17)],ans:'17',why:'Work backwards: 9 × 3 = 27, 27 + 7 = 34, 34 ÷ 2 = 17'},
+ {q:'What is the last digit of 7¹⁰⁰?',p:[N(1,{plain:true})],ans:'1',why:'Powers of 7 end in 7, 9, 3, 1 and repeat every 4, and 100 is a multiple of 4'},
+ {q:'Ten people each shake hands once with everyone else. How many handshakes are there?',p:[N(45)],ans:'45',why:'n(n − 1)/2 = 10 · 9 / 2'},
+ {q:'If a > b > 0, which is bigger, 1/a or 1/b?',p:[C(['1/a','1/b','They’re equal','It depends'],1)],ans:'1/b',why:'Dividing by a smaller positive number gives a bigger result'},
+ {q:'If x < −1, put x, x² and x³ in order from least to greatest.',p:[C(['x < x² < x³','x³ < x < x²','x < x³ < x²','x² < x < x³'],1)],ans:'x³ < x < x²',why:'Try x = −2: −8 < −2 < 4'},
+ {q:'Always, sometimes or never: x² > x',p:[C(['Always','Sometimes','Never'],1)],ans:'Sometimes',why:'True for x > 1 or x < 0, false for 0 ≤ x ≤ 1'},
+ {q:'Always, sometimes or never: the square of an odd number is odd. Prove it.',p:[C(['Always','Sometimes','Never'],0,{label:'Answer'}),SELF({label:'Your proof'})],ans:'Always. (2n + 1)² = 4n² + 4n + 1 = 2(2n² + 2n) + 1, which is odd.',why:'Write the odd number as 2n + 1'},
+ {q:'If 3x + 5 = 20, what is 6x + 10? Answer without solving for x.',p:[N(40,{plain:true})],ans:'40',why:'6x + 10 is 2(3x + 5) = 2 · 20'},
+ {q:'If a + b = 7 and ab = 10, find a² + b² without finding a and b.',p:[N(29,{plain:true})],ans:'29',why:'(a + b)² − 2ab = 49 − 20'}]}
+];
+SESSIONS.forEach(s=>s.probs.forEach((p,i)=>{p.id=s.id+'#'+(i+1);p.sid=s.id;p.n=i+1}));
+const ALL=SESSIONS.flatMap(s=>s.probs);
+const BYID=Object.fromEntries(ALL.map(p=>[p.id,p]));
+const SESS=Object.fromEntries(SESSIONS.map(s=>[s.id,s]));
+
+const CHEAT=[
+['Equations and inequalities',['Steps: distribute → combine like terms → variables to one side → undo + and − → undo × and ÷ → check.','Clear fractions by multiplying every term by the common denominator.','False ending (5 = 3) → no solution. True ending (4 = 4) → infinitely many.','Inequalities: flip the sign when multiplying or dividing by a negative. Open circle for < and >, closed for ≤ and ≥.','"At least" means ≥. "At most" or "no more than" means ≤. Round to whole units in the direction that still works.']],
+['Absolute value',['Isolate the bars first. If they equal a negative number, there is no solution.','|A| = b → A = b or A = −b','|A| < b → −b < A < b (and)','|A| > b → A < −b or A > b (or)']],
+['Linear equations and functions',['Slope: m = (y₂ − y₁)/(x₂ − x₁)','Slope-intercept: y = mx + b','Point-slope: y − y₁ = m(x − x₁)','Standard: Ax + By = C (integers, A positive)','Point-slope to standard: distribute, clear fractions, move x and y left.','Intercepts from standard form: set y = 0 for the x-intercept and x = 0 for the y-intercept.','Parallel: same slope. Perpendicular: negative reciprocal (m and −1/m).','Horizontal y = c: slope 0. Vertical x = c: undefined slope.','Function: each input has exactly one output (vertical line test). f(a) means plug in a.','Word problems: slope = rate, b = starting value.']],
+['Coordinate geometry',['Distance: d = √((x₂ − x₁)² + (y₂ − y₁)²)','Midpoint: ((x₁ + x₂)/2, (y₁ + y₂)/2)','Missing endpoint: B = (2Mx − Ax, 2My − Ay)','Moving d units along slope rise/run: one step covers √(rise² + run²) units, so scale the steps to reach d.','Right angle: slopes are negative reciprocals, or a² + b² = c².','Isosceles: two equal sides. Equilateral: three equal sides. Scalene: none.','Parallelogram: opposite sides have equal slopes.','Triangle area: ½ · base · height. Circle circumference: C = 2πr. Area: A = πr².']],
+['Systems',['Substitution: use it when a variable is alone. Elimination: line up, multiply, add.','0 = nonzero → no solution (parallel). 0 = 0 → infinitely many (same line).','Inequality systems: dashed line for < or >, solid for ≤ or ≥. The answer is the overlap of the shading. Test a point like (0, 0).']],
+['Exponents and scientific notation',['xᵃ · xᵇ = xᵃ⁺ᵇ','xᵃ ÷ xᵇ = xᵃ⁻ᵇ','(xᵃ)ᵇ = xᵃᵇ','(xy)ᵃ = xᵃyᵃ','x⁰ = 1','x⁻ᵃ = 1/xᵃ','x^(m/n) = (ⁿ√x)ᵐ','Scientific notation: a × 10ⁿ with 1 ≤ a < 10. Multiply: multiply fronts, add exponents. Divide: divide fronts, subtract. Then fix the front number.']],
+['Exponential functions',['y = a · bˣ, where a is the start. b > 1 is growth; 0 < b < 1 is decay.','Growth: y = a(1 + r)ᵗ. Decay: y = a(1 − r)ᵗ. Write r as a decimal (6% = 0.06).','Table test: same amount added each step is linear. Same amount multiplied each step is exponential.']],
+['Radicals',['√(ab) = √a · √b. Pull out the biggest perfect square: 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144.','a√b · c√d = ac√(bd), then simplify.','Add or subtract only like radicals. Simplify first.','Variables: pull out pairs. √(x⁷) = x³√x.','Rationalize: multiply top and bottom by the radical in the denominator.','(a + √b)(a − √b) = a² − b']],
+['Polynomials and factoring',['(a + b)² = a² + 2ab + b²','(a − b)² = a² − 2ab + b²','(a + b)(a − b) = a² − b²','Factoring order: GCF → difference of squares (2 terms) → x² + bx + c (multiply to c, add to b) → AC method for ax² + bx + c → grouping (4 terms).','Check by multiplying back.']],
+['Rational expressions',['Factor top and bottom, then cancel factors only, never terms.','Excluded values: anything that makes the original denominator 0.','Multiply: factor, cancel, multiply. Divide: flip the second fraction, then multiply.']],
+['GCF, LCM, divisibility and proofs',['Prime factorize. GCF: shared primes, lowest powers. LCM: all primes, highest powers. GCF × LCM = a × b.','Equal groups → GCF. "Together again" → LCM.','Divisible by 2: even. By 3: digit sum ÷ 3. By 4: last two digits. By 5: ends in 0 or 5. By 6: 2 and 3. By 9: digit sum ÷ 9. By 10: ends in 0.','Proof templates: even = 2n, odd = 2n + 1, consecutive = n, n + 1, n + 2. Show the result is 2(…) for even, 2(…) + 1 for odd, or 3(…) for divisible by 3.','One counterexample disproves. Examples never prove.']],
+['Number types',['Natural ⊂ whole ⊂ integers ⊂ rational. Irrational = never ends or repeats (√2, π). Simplify first: √16 = 4 is rational.']],
+['Sequences and patterns',['Arithmetic (add d): nth term = a₁ + (n − 1)d','Geometric (multiply r): nth term = a₁ · rⁿ⁻¹','Sum 1 + 2 + … + n = n(n + 1)/2','Handshakes among n people = n(n − 1)/2','Last digit of a power: find the repeating cycle and use the remainder.']],
+['Big-number shortcuts',['Let x = the big number and simplify before plugging in.','(n + 1) − n = 1','a² − b² = (a + b)(a − b)','(n − 1)(n + 1) = n² − 1','(a + b)² − 2ab = a² + b²']],
+['Problem-solving checklist',['What is it asking for? Write the units.','Pick a strategy: picture, table and pattern, work backwards, simpler problem, estimate, or look for structure.','Solve, then check that the answer makes sense (size, sign, units).']],
+['Common mistakes',['Forgetting to flip the inequality sign','Not distributing a minus to every term','Using the radius when the problem needs the circumference or diameter','Canceling terms instead of factors','Forgetting the ± (two cases) with absolute value','Mixing up x and y in slope (always y over x)']]
+];
+
+/* ================= ANSWER CHECKING ================= */
+const SUP={'⁰':'0','¹':'1','²':'2','³':'3','⁴':'4','⁵':'5','⁶':'6','⁷':'7','⁸':'8','⁹':'9','⁻':'-','ⁿ':'n','ˣ':'x','ᵗ':'t'};
+function uni(s){
+  return String(s).replace(/[−–—]/g,'-').replace(/[×·∙⋅]/g,'*').replace(/÷/g,'/')
+    .replace(/≤|=</g,'<=').replace(/≥|=>/g,'>=').replace(/≠/g,'!=').replace(/½/g,'(1/2)').replace(/π/g,'pi')
+    .replace(/[$]/g,'').replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹⁻ⁿˣᵗ]+/g,m=>'^('+[...m].map(c=>SUP[c]).join('')+')');
+}
+function prep(s){
+  s=uni(s);
+  s=s.replace(/√\s*\(/g,'sqrt(').replace(/√\s*([0-9.]+|[a-zA-Z])/g,'sqrt($1)');
+  s=s.replace(/(\d(?:\.\d+)?)\s*[eE]\s*([+-]?\d+)(?![a-zA-Z\d])/g,'($1*10^($2))');
+  s=s.replace(/sqrt/g,'§').replace(/pi/g,'¶');
+  s=s.replace(/([a-zA-Z])(?=[a-zA-Z])/g,'$1*');
+  s=s.replace(/([a-zA-Z0-9.)¶])\s*(?=[(§¶])/g,'$1*');
+  s=s.replace(/(\d)\s*(?=[a-zA-Z])/g,'$1*');
+  s=s.replace(/([)¶])\s*(?=[a-zA-Z0-9])/g,'$1*');
+  return s.replace(/§/g,'sqrt').replace(/¶/g,'pi');
+}
+function toNum(v){
+  if(typeof v==='number') return v;
+  if(typeof v==='boolean') return v;
+  if(v&&typeof v.re==='number') return Math.abs(v.im)<1e-12?v.re:NaN;
+  if(v&&typeof v.valueOf==='function'){const n=Number(v.valueOf());return n}
+  return NaN;
+}
+function special(s){
+  const t=String(s).toLowerCase();
+  if(/no\s*sol|none|∅|empty|no\s*answer|no\s*real/.test(t)) return 'none';
+  if(/infinit|all\s*real|many|every|any\s*(real|number)|same\s*line|∞/.test(t)) return 'all';
+  return null;
+}
+function symbols(str){
+  return [...new Set(math.parse(str).filter(n=>n.isSymbolNode).map(n=>n.name))]
+    .filter(n=>!['pi','e','sqrt'].includes(n)&&typeof math[n]!=='function');
+}
+function close(u,e,tol=1e-7,rel=1e-7){return Math.abs(u-e)<=Math.max(tol,rel*Math.abs(e))}
+function equiv(u,e){
+  const cu=math.compile(u), ce=math.compile(e);
+  const vars=[...new Set([...symbols(u),...symbols(e)])];
+  let good=0;
+  for(let k=0;k<10&&good<6;k++){
+    const sc={}; vars.forEach(v=>sc[v]=0.55+Math.random()*2.6+k*0.13);
+    const ev=toNum(ce.evaluate(sc)); if(!isFinite(ev)) continue;
+    const uv=toNum(cu.evaluate(sc)); if(!isFinite(uv)) return false;
+    if(!close(uv,ev,1e-7,1e-7)) return false; good++;
+  }
+  return good>0;
+}
+function evalNum(raw){
+  let s=String(raw).replace(/(\d),(?=\d{3}\b)/g,'$1');
+  s=s.replace(/\s*trillion/gi,'*1e12').replace(/\s*billion/gi,'*1e9').replace(/\s*million/gi,'*1e6').replace(/\s*thousand/gi,'*1e3');
+  if(s.includes('=')) s=s.slice(s.lastIndexOf('=')+1);
+  s=s.replace(/sqrt/g,'§').replace(/pi/g,'¶').replace(/[a-zA-Z]{2,}/g,' ').replace(/§/g,'sqrt').replace(/¶/g,'pi').trim();
+  if(!s) throw new Error('empty');
+  const v=toNum(math.evaluate(prep(s)));
+  if(typeof v!=='number'||!isFinite(v)) throw new Error('nan');
+  return v;
+}
+function factorCount(str){
+  const out=[];
+  (function f(n){
+    while(n.isParenthesisNode) n=n.content;
+    if(n.isOperatorNode&&n.fn==='multiply'){n.args.forEach(f);return}
+    if(n.isOperatorNode&&n.fn==='unaryMinus'){f(n.args[0]);return}
+    if(n.isConstantNode&&Math.abs(Number(n.value))===1) return;
+    out.push(n);
+  })(math.parse(str));
+  return out.length;
+}
+function stripExp(u){return u.replace(/\^\([^()]*\)/g,'^E').replace(/\^-?[\d.]+/g,'^E')}
+function formCheck(form,u,expected){
+  if(!form) return null;
+  if(form==='expanded'){
+    if(/\(/.test(stripExp(u).replace(/sqrt\(/g,''))) return 'That’s equal, but multiply everything out (no parentheses left).';
+  }
+  if(form==='factor'){
+    if(factorCount(u)<factorCount(expected)) return 'That’s equal, but it isn’t factored completely yet.';
+  }
+  if(form==='nopow'){
+    if(/\^/.test(u)) return 'That’s equal, but cancel the common factor to simplify it.';
+  }
+  if(form==='simp'){
+    if(/\^\(?\s*-/.test(u)) return 'That’s equal, but use positive exponents only.';
+    if(/\)\s*\^/.test(u)) return 'That’s equal, but apply the exponent to everything inside the parentheses.';
+    const letters=(u.replace(/sqrt|pi/g,'').match(/[a-zA-Z]/g)||[]);
+    const cnt={}; letters.forEach(c=>cnt[c]=(cnt[c]||0)+1);
+    if(Object.values(cnt).some(c=>c>1)) return 'That’s equal, but simplify more: each variable should appear only once.';
+  }
+  if(form==='radical'){
+    if(/\/[^/]*sqrt/.test(u)) return 'That’s equal, but rationalize: no radical in the denominator.';
+    const rads=[...u.matchAll(/sqrt\(([^()]*)\)/g)].map(m=>m[1]);
+    if(new Set(rads.map(r=>r.replace(/\s/g,''))).size<rads.length) return 'That’s equal, but combine the like radicals into one term.';
+    for(const c of rads){
+      const lead=c.match(/^\s*(\d+)/); const n=lead?parseInt(lead[1]):1;
+      for(let k=2;k*k<=n;k++) if(n%(k*k)===0) return 'That’s equal, but the radical can still be simplified (pull out the perfect square).';
+      if(/[a-zA-Z]\^\(?\s*([2-9]|\d{2,})/.test(c)) return 'That’s equal, but pull the pairs of variables out of the radical.';
+    }
+    if(!/sqrt/.test(u)) return 'Give the exact answer using √, not a decimal.';
+  }
+  return null;
+}
+function rhs(raw){const s=String(raw);const i=s.lastIndexOf('=');return (i>=0&&s[i-1]!=='<'&&s[i-1]!=='>'&&s[i-1]!=='!')?s.slice(i+1):s}
+
+function ineqExpr(raw){
+  let s=uni(raw).replace(/\s+/g,' ').trim();
+  const pieces=s.split(/\bor\b|∪|\bU\b|\|\|/i);
+  return pieces.map(piece=>{
+    piece=piece.trim();
+    const iv=piece.match(/^([\[(])\s*([^,]+?)\s*,\s*([^\])]+?)\s*([\])])$/);
+    if(iv){
+      const lo=iv[2],hi=iv[3],c=[];
+      if(!/inf|∞/i.test(lo)) c.push(`(x ${iv[1]==='['?'>=':'>'} (${prep(lo)}))`);
+      if(!/inf|∞/i.test(hi)) c.push(`(x ${iv[4]===']'?'<=':'<'} (${prep(hi)}))`);
+      return c.length?'('+c.join(' and ')+')':'(true)';
+    }
+    return '('+piece.split(/\band\b|&&?|,/i).map(atom=>{
+      atom=atom.trim();
+      const m=atom.match(/^(.*?)(<=|>=|<|>)(.*?)(<=|>=|<|>)(.*)$/);
+      if(m) return `((${prep(m[1])}) ${m[2]} (${prep(m[3])})) and ((${prep(m[3])}) ${m[4]} (${prep(m[5])}))`;
+      const k=atom.match(/^(.*?)(<=|>=|!=|<|>|=)(.*)$/);
+      if(!k) throw new Error('noop');
+      const op=k[2]==='='?'==':k[2];
+      return `((${prep(k[1])}) ${op} (${prep(k[3])}))`;
+    }).join(' and ')+')';
+  }).join(' or ');
+}
+function ineqSame(userExpr,expExpr){
+  const cu=math.compile(userExpr), ce=math.compile(expExpr);
+  const pts=[]; for(let x=-30;x<=30;x+=0.25) pts.push(x);
+  (expExpr.match(/-?\d+(\.\d+)?/g)||[]).forEach(n=>{const v=+n;pts.push(v,v-1e-3,v+1e-3)});
+  for(const x of pts){ if(Boolean(cu.evaluate({x}))!==Boolean(ce.evaluate({x}))) return false }
+  return true;
+}
+
+/* returns {ok:true|false|null, msg} ; ok:null means unreadable / empty */
+function checkPart(p,val){
+  const empty={ok:null,msg:'Enter an answer first.'};
+  const unread={ok:null,msg:'I couldn’t read that. Check the parentheses and symbols.'};
+  try{
+    switch(p.t){
+    case 'choice': if(val==null) return {ok:null,msg:'Pick an answer.'}; return {ok:val===p.a};
+    case 'multi': { const v=[...(val||[])].sort().join(), a=[...p.a].sort().join(); if(!val||!val.length) return {ok:null,msg:'Check at least one box.'}; return {ok:v===a} }
+    case 'self': return {ok:null};
+    case 'text': if(!val||!val.trim()) return empty; return {ok:p.re.test(val)};
+    }
+    if(!val||!String(val).trim()) return empty;
+    const sp=special(val);
+    if(p.t==='num'){
+      if(typeof p.a==='string'&&(p.a==='none'||p.a==='all')) return {ok:sp===p.a};
+      if(sp) return {ok:false};
+      let u; try{u=evalNum(val)}catch(e){return unread}
+      const a=typeof p.a==='string'?math.evaluate(p.a):p.a;
+      return {ok:close(u,a,p.tol??1e-6,p.rel??1e-9)};
+    }
+    if(p.t==='set'){
+      if(p.a==='none'||p.a==='all') return {ok:sp===p.a};
+      if(sp) return {ok:false};
+      const parts=uni(val).replace(/[a-zA-Z]\s*(!=|=)/g,' ').split(/,|;|\bor\b|\band\b/i).map(x=>x.trim()).filter(Boolean);
+      let nums; try{nums=parts.map(x=>{const v=toNum(math.evaluate(prep(x)));if(!isFinite(v))throw 0;return v})}catch(e){return unread}
+      const want=[...p.a]; if(nums.length!==want.length) return {ok:false,msg:nums.length<want.length?'There should be more values.':'There are too many values.'};
+      const used=new Set(); for(const v of nums){const i=want.findIndex((w,j)=>!used.has(j)&&close(v,w,1e-6)); if(i<0) return {ok:false}; used.add(i)}
+      return {ok:true};
+    }
+    if(p.t==='pt'){
+      if(p.a==='none'||p.a==='all') return {ok:sp===p.a};
+      if(sp) return {ok:false};
+      let s=uni(val).replace(/[a-zA-Z]\s*=/g,' ').replace(/[()\[\]]/g,' ').trim();
+      let bits=s.includes(',')?s.split(','):s.split(/\s+/); bits=bits.map(x=>x.trim()).filter(Boolean);
+      if(bits.length!==2) return {ok:null,msg:'Write a point like (2, −1).'};
+      let v; try{v=bits.map(b=>{const n=toNum(math.evaluate(prep(b)));if(!isFinite(n))throw 0;return n})}catch(e){return unread}
+      return {ok:close(v[0],p.a[0],1e-6)&&close(v[1],p.a[1],1e-6)};
+    }
+    if(p.t==='expr'){
+      if(sp) return {ok:false};
+      let u; try{u=prep(rhs(val)); math.parse(u)}catch(e){return unread}
+      let eq; try{eq=equiv(u,p.a)}catch(e){return unread}
+      if(!eq) return {ok:false};
+      const f=formCheck(p.form,u,p.a); if(f) return {ok:false,msg:f,formOnly:true};
+      return {ok:true};
+    }
+    if(p.t==='line'){
+      if(sp) return {ok:false};
+      let s=uni(val), L='y', R=s;
+      const i=s.indexOf('='); if(i>=0){L=s.slice(0,i);R=s.slice(i+1)}
+      let f,cf; try{f=`(${prep(L)})-(${prep(R)})`; cf=math.compile(f)}catch(e){return unread}
+      const ce=math.compile(p.a);
+      try{
+        for(const x of [-2.5,-1,0.5,1.7,3.2]){
+          const y=toNum(ce.evaluate({x}));
+          const a=toNum(cf.evaluate({x,y})), b=toNum(cf.evaluate({x,y:y+1}));
+          if(!isFinite(a)||!isFinite(b)) return unread;
+          if(Math.abs(a)>1e-7*Math.max(1,Math.abs(b))) return {ok:false};
+          if(Math.abs(b)<1e-9) return {ok:false};
+        }
+      }catch(e){return unread}
+      if(p.form==='std'){
+        const Rp=prep(R), Lp=prep(L);
+        const msg='Right line, but standard form is Ax + By = C with whole numbers and A positive.';
+        if(i<0||/[a-zA-Z]/.test(Rp.replace(/sqrt|pi/g,''))||!/x/.test(Lp)||!/y/.test(Lp)||/\//.test(Lp)||/\./.test(Lp+Rp)) return {ok:false,msg,formOnly:true};
+        const cl=math.compile(Lp); if(toNum(cl.evaluate({x:1,y:0}))-toNum(cl.evaluate({x:0,y:0}))<=0) return {ok:false,msg,formOnly:true};
+      }
+      return {ok:true};
+    }
+    if(p.t==='ineq'){
+      if(sp) return {ok:false};
+      let ue; try{ue=ineqExpr(val); math.compile(ue).evaluate({x:0})}catch(e){return {ok:null,msg:'Write it like x < −4, −2 < x ≤ 3, or x < −2 or x > 4.'}}
+      return {ok:ineqSame(ue,p.a)};
+    }
+  }catch(e){return unread}
+  return unread;
+}
+
+/* ================= STATE ================= */
+const KEY='alg1-final-practice-v1';
+let store={res:{}};
+try{const s=JSON.parse(localStorage.getItem(KEY)||'null'); if(s&&s.res) store=s}catch(e){}
+if(!store.time) store.time={total:0,days:{}};
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store))}catch(e){}}
+
+/* ---- study timer: counts while the page is open and you've done something in the last 2 minutes ---- */
+const IDLE_MS=120000;
+const todayKey=()=>new Date().toLocaleDateString('en-CA');
+const todayMs=()=>store.time.days[todayKey()]||0;
+function fmtClock(ms){const s=Math.floor(ms/1000),h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60;return h?`${h}:${String(m).padStart(2,'0')}:${String(x).padStart(2,'0')}`:`${m}:${String(x).padStart(2,'0')}`}
+function fmtShort(ms){const m=Math.floor(ms/60000),h=Math.floor(m/60);return h?`${h}h ${m%60}m`:`${m}m`}
+let lastAct=Date.now(), tick=0;
+['pointerdown','keydown','scroll','touchstart','input'].forEach(ev=>addEventListener(ev,()=>lastAct=Date.now(),{passive:true,capture:true}));
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')lastAct=Date.now();save()});
+function paintTimer(active){
+  const el=document.getElementById('timer'); el.classList.toggle('paused',!active);
+  document.getElementById('tnow').textContent=fmtClock(todayMs());
+  el.title=`${active?'Counting':'Paused'} · ${fmtShort(store.time.total)} studied in total`;
+  document.querySelectorAll('[data-time]').forEach(n=>{const k=n.dataset.time;n.textContent=k==='today'?fmtShort(todayMs()):k==='total'?fmtShort(store.time.total):fmtClock(run&&run.ms||0)});
+}
+setInterval(()=>{
+  const active=document.visibilityState==='visible'&&Date.now()-lastAct<IDLE_MS;
+  if(active){store.time.total+=1000;const d=todayKey();store.time.days[d]=(store.time.days[d]||0)+1000;if(run&&view.kind==='run'&&run.i<run.queue.length)run.ms=(run.ms||0)+1000}
+  paintTimer(active); if(++tick%10===0) save();
+},1000);
+
+/* ---- confetti ---- */
+const calm=matchMedia('(prefers-reduced-motion: reduce)');
+let bits=[], rafOn=false;
+function confetti(from,count=60,spread=1){
+  if(calm.matches) return;
+  const cv=document.getElementById('confetti'), dpr=devicePixelRatio||1;
+  cv.width=innerWidth*dpr; cv.height=innerHeight*dpr;
+  const cs=getComputedStyle(document.documentElement), cols=['--accent','--ok','--hl','--bad','--warn'].map(v=>cs.getPropertyValue(v).trim());
+  let x=innerWidth/2,y=innerHeight/2;
+  if(from){const r=from.getBoundingClientRect();x=r.left+r.width/2;y=r.top+r.height/2}
+  for(let k=0;k<count;k++){const a=-Math.PI/2+(Math.random()-.5)*Math.PI*1.1*spread, v=6+Math.random()*7*spread;
+    bits.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v,w:5+Math.random()*6,h:8+Math.random()*8,r:Math.random()*6,vr:(Math.random()-.5)*.4,c:cols[k%cols.length],life:0})}
+  if(!rafOn){rafOn=true;requestAnimationFrame(step)}
+}
+function step(){
+  const cv=document.getElementById('confetti'), g=cv.getContext('2d'), dpr=devicePixelRatio||1;
+  g.setTransform(dpr,0,0,dpr,0,0); g.clearRect(0,0,innerWidth,innerHeight);
+  bits=bits.filter(b=>b.life<110&&b.y<innerHeight+40);
+  for(const b of bits){b.life++;b.vy+=.28;b.vx*=.985;b.x+=b.vx;b.y+=b.vy;b.r+=b.vr;
+    g.save();g.globalAlpha=Math.max(0,1-b.life/110);g.translate(b.x,b.y);g.rotate(b.r);g.fillStyle=b.c;g.fillRect(-b.w/2,-b.h/2,b.w,Math.abs(Math.cos(b.life*.15))*b.h+1);g.restore()}
+  if(bits.length) requestAnimationFrame(step); else {rafOn=false; g.clearRect(0,0,innerWidth,innerHeight)}
+}
+const FLAME='<svg width="14" height="16" viewBox="0 0 14 16" aria-hidden="true"><path d="M7 0c1 3.2 5.5 5 5.5 9.6A5.5 5.5 0 0 1 1.5 9.6C1.5 7 3 5.6 3.8 4.6c.2 1.7 1 2.6 1.9 3C5.4 5 6 2.3 7 0z" fill="currentColor"/></svg>';
+function setRes(id,r){store.res[id]=r;save()}
+function statsFor(list){let r=0,m=0;list.forEach(p=>{const v=store.res[p.id];if(v==='right')r++;else if(v==='missed')m++});return {r,m,n:list.length}}
+
+let view={kind:'home'};
+let run=null; // {title, sid, queue:[ids], i, results:{id:'right'|'missed'}, phase:'answer'|'done', inputs, picked, tried, revealed}
+
+/* ================= RENDER ================= */
+const app=document.getElementById('app');
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function toast(t){const el=document.getElementById('toast');el.textContent=t;el.hidden=false;clearTimeout(toast._t);toast._t=setTimeout(()=>el.hidden=true,1800)}
+
+function route(){
+  const h=(location.hash||'').slice(1);
+  if(SESS[h]) startRun(h);
+  else if(h==='missed') startRun('missed');
+  else if(/^mix-(10|25|50)$/.test(h)) startRun(h);
+  else if(h==='mix') startRun('mix-10');
+  else if(h==='weak') startRun('weak');
+  else if(h==='cheat') {view={kind:'cheat'};render()}
+  else {view={kind:'home'};render()}
+}
+function go(h){ if(location.hash.slice(1)===h) route(); else location.hash=h }
+
+function startRun(kind){
+  let q,title,tag,sid=null;
+  if(kind==='missed'){q=ALL.filter(p=>store.res[p.id]==='missed').map(p=>p.id);title='Your missed problems';tag='Redo'}
+  else if(kind.startsWith('mix-')){const n=+kind.slice(4);q=shuffle(GRADED).slice(0,n).map(p=>p.id);title=`${n}-question practice test`;tag='Mixed test · every topic'}
+  else if(kind==='weak'){q=weakQueue();title='Weak spots test';tag='Built from what you missed'}
+  else {const s=SESS[kind];q=s.probs.map(p=>p.id);title=s.title;tag=s.tag;sid=kind}
+  run={kind,title,tag,sid,queue:q,i:0,results:{},fresh:true,ms:0,streak:0,best:0};
+  // resume where you left off in a day: jump to first unanswered
+  if(sid){const k=q.findIndex(id=>!store.res[id]); run.i=k<0?0:k; run.fresh=k<=0&&!q.some(id=>store.res[id])}
+  resetProblem(); view={kind:'run'}; render(); window.scrollTo(0,0);
+}
+const GRADED=ALL.filter(p=>!p.p.every(x=>x.t==='self'));
+function weakTopics(){const t={};ALL.forEach(p=>{if(store.res[p.id]==='missed')t[p.sid]=(t[p.sid]||0)+1});return SESSIONS.filter(s=>t[s.id]).map(s=>({s,n:t[s.id]}))}
+/* every missed problem, plus up to 2 not-yet-mastered problems from each weak topic, shuffled together */
+function weakQueue(){
+  const missed=ALL.filter(p=>store.res[p.id]==='missed');
+  const extra=weakTopics().flatMap(({s})=>shuffle(s.probs.filter(p=>!store.res[p.id]&&GRADED.includes(p))).slice(0,2));
+  return shuffle([...missed,...extra]).map(p=>p.id);
+}
+function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function resetProblem(){Object.assign(run,{vals:{},marks:null,msgs:{},phase:'answer',tried:0,revealed:false,graded:null,confirmReset:false,selfDone:false,anim:'enter'})}
+
+function render(){
+  if(view.kind==='home') return renderHome();
+  if(view.kind==='cheat') return renderCheat();
+  if(view.kind==='run') return run.queue.length===0?renderEmpty():(run.i>=run.queue.length?renderSummary():renderProblem());
+}
+
+function barHTML(st){const r=st.n?st.r/st.n*100:0,m=st.n?st.m/st.n*100:0;return `<div class="bar" aria-hidden="true"><i class="r" style="width:${r}%"></i><i class="m" style="width:${m}%"></i></div>`}
+
+function renderHome(){
+  const tot=statsFor(ALL), missed=tot.m, weak=weakTopics();
+  const days=SESSIONS.filter(s=>s.id.startsWith('day-')), extras=SESSIONS.filter(s=>!s.id.startsWith('day-'));
+  const card=(s,i)=>{const st=statsFor(s.probs);const status=st.r===st.n?'Done':(st.r+st.m?`${st.r} right · ${st.m} to redo`:'Not started');
+    return `<button class="sess" style="--i:${i}" data-go="${s.id}"><span class="tag">${esc(s.tag)}</span><h3>${esc(s.title)}</h3>${barHTML(st)}<span class="meta"><span>${status}</span><span>${st.n} problems</span></span></button>`};
+  app.innerHTML=`
+  <header class="hero">
+    <span class="eyebrow">Algebra 1 Honors · first-semester final</span>
+    <h1>Final exam <span class="hl">practice</span></h1>
+    <p class="lede">Every problem from your study plan. Type your answer, check it, and see the worked answer right away. Anything you miss goes on your redo list.</p>
+    <div class="stats"><span><b>${tot.r}</b> <span class="muted">of ${tot.n} right</span></span><span><b>${missed}</b> <span class="muted">to redo</span></span><span><b data-time="today">${fmtShort(todayMs())}</b> <span class="muted">studied today</span></span><span><b data-time="total">${fmtShort(store.time.total)}</b> <span class="muted">in total</span></span></div>
+  </header>
+  <div class="quick">
+    <button class="btn primary" data-go="${(days.find(s=>statsFor(s.probs).r<s.probs.length)||days[0]).id}">Continue studying</button>
+    <button class="btn" data-go="weak" ${missed?'':'disabled'}>Weak spots test</button>
+    <button class="btn" data-go="cheat">Cheat sheet</button>
+  </div>
+  <div class="sectionhead"><h2>Practice tests</h2><span class="rule"></span><span class="muted" style="font-size:.85rem">random problems from every topic</span></div>
+  <div class="grid tests">${[[10,'Quick check','About 15 minutes'],[25,'Half test','About 40 minutes'],[50,'Full final','About 75 minutes']].map(([n,h,t],i)=>`<button class="sess" style="--i:${i}" data-go="mix-${n}"><span class="tag">${n} questions</span><h3>${h}</h3><span class="meta"><span>${t}</span><span>New mix each time</span></span></button>`).join('')}</div>
+  <div class="sectionhead"><h2>Your weak spots</h2><span class="rule"></span></div>
+  ${weak.length?`<div class="sess weakcard"><span class="tag">Weak spots test · ${weakQueue().length} questions</span><h3>Mixes every problem you missed with fresh ones from the same topics</h3><div class="chips">${weak.map(({s,n})=>`<span class="chip"><b>${esc(s.tag)}</b> ${esc(s.title)} · ${n} missed</span>`).join('')}</div><div class="actions"><button class="btn primary" data-go="weak">Take the weak spots test</button><button class="btn" data-go="missed">Just redo the ${missed} I missed</button></div></div>`
+  :`<p class="muted">Nothing yet. Every problem you miss, in a day session or a test, lands here, and you get a test built from those topics.</p>`}
+  <div class="sectionhead"><h2>Daily sessions</h2><span class="rule"></span><span class="muted" style="font-size:.85rem">20–30 min each</span></div>
+  <div class="grid">${days.map(card).join('')}</div>
+  <div class="sectionhead"><h2>Extras</h2><span class="rule"></span></div>
+  <div class="grid">${extras.map(card).join('')}</div>
+  <div class="sectionhead"><h2>Progress</h2><span class="rule"></span></div>
+  <div class="actions" id="resetbox">${store._confirm?`<div class="confirm"><span>Clear every answer and start over?</span><button class="btn badb" id="resetyes">Clear progress</button><button class="btn" id="resetno">Keep it</button></div>`:`<p class="help">Your progress is saved in this browser only.</p><span class="spacer"></span><button class="btn ghost" id="reset" ${Object.keys(store.res).length?'':'disabled'}>Reset progress</button>`}</div>`;
+  app.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));
+  const r=document.getElementById('reset'); if(r) r.onclick=()=>{store._confirm=true;renderHome()};
+  const y=document.getElementById('resetyes'); if(y) y.onclick=()=>{store={res:{},time:store.time};save();toast('Progress cleared');renderHome()};
+  const n=document.getElementById('resetno'); if(n) n.onclick=()=>{delete store._confirm;renderHome()};
+}
+
+function renderCheat(){
+  app.innerHTML=`<div class="top"><button class="btn ghost" data-go="">← All sessions</button></div>
+  <header class="hero"><span class="eyebrow">Open-notes final</span><h1>Cheat sheet</h1><p class="lede">Every formula and step from Days 1–9 and the extras, in one place.</p></header>
+  <div class="cheat">${CHEAT.map(([h,items])=>`<section><h3>${esc(h)}</h3><ul>${items.map(i=>`<li>${esc(i)}</li>`).join('')}</ul></section>`).join('')}</div>`;
+  app.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));
+}
+
+function renderEmpty(){
+  app.innerHTML=`<div class="top"><button class="btn ghost" data-go="">← All sessions</button></div>
+  <div class="card"><h2>Nothing to redo</h2><p class="muted">You haven’t missed anything yet. Problems you get wrong land here automatically.</p><div class="actions"><button class="btn primary" data-go="">Back to sessions</button></div></div>`;
+  app.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));
+}
+
+const KEYS_BASE=['²','³','^','√','π','(',')','/','−'];
+const KEYS_INEQ=['<','>','≤','≥'];
+function keypadFor(parts){
+  const types=new Set(parts.map(p=>p.t));
+  if(!['num','set','pt','expr','line','ineq'].some(t=>types.has(t))) return '';
+  let k=[...KEYS_BASE]; if(types.has('ineq')) k=[...KEYS_INEQ,'or',...k];
+  const words=[]; if(['num','set','pt','ineq'].some(t=>types.has(t))) words.push('No solution','Infinitely many');
+  return `<div class="keys" aria-label="Math symbols">${k.map(c=>`<button type="button" class="key${c==='or'?' word':''}" data-k="${c==='or'?' or ':c==='−'?'-':c}">${c}</button>`).join('')}${words.map(w=>`<button type="button" class="key word" data-w="${w}">${w}</button>`).join('')}</div>`;
+}
+const PH={num:'Your answer',set:'like 4, −3',pt:'like (2, −1)',expr:'like 3x^2y',line:'like y = 2x − 4',ineq:'like x < −4 or x ≥ 2',text:'Your answer'};
+const DEF={set:'x =',pt:'(x, y) =',line:'Equation',ineq:'Solution'};
+
+function partHTML(p,j,prob){
+  const id=`in-${j}`, lab=p.label||DEF[p.t]||(prob.p.length>1?'Part '+(j+1):'Answer');
+  const done=run.phase!=='answer';
+  const mk=run.marks&&run.marks[j]!=null&&p.t!=='self'?`<span class="mark ${run.marks[j]?'ok':'bad'}" aria-label="${run.marks[j]?'correct':'incorrect'}">${run.marks[j]?'✓':'✗'}</span>`:'';
+  const msg=run.msgs[j]?`<span class="pmsg">${esc(run.msgs[j])}</span>`:'';
+  if(p.t==='choice'||p.t==='multi'){
+    const v=run.vals[j];
+    const isSel=i=>p.t==='choice'?v===i:(v||[]).includes(i);
+    const cls=i=>{let c='opt';if(isSel(i))c+=' sel';if(run.revealed||run.graded===true){const right=p.t==='choice'?i===p.a:p.a.includes(i);if(right)c+=' right';else if(isSel(i))c+=' wrong'}return c};
+    return `<div class="part"><div class="inrow"><span class="plabel">${esc(lab)}</span>${mk}</div><div class="opts" role="${p.t==='choice'?'radiogroup':'group'}" aria-label="${esc(lab)}">${p.opts.map((o,i)=>`<button type="button" class="${cls(i)}" data-j="${j}" data-o="${i}" role="${p.t==='choice'?'radio':'checkbox'}" aria-checked="${isSel(i)}" ${done?'disabled':''}>${p.t==='multi'?(isSel(i)?'☑ ':'☐ '):''}${esc(o)}</button>`).join('')}</div>${msg}</div>`;
+  }
+  if(p.t==='self'){
+    return `<div class="part"><label for="${id}">${esc(p.label||'Your work (optional)')}</label><textarea class="inp" id="${id}" data-j="${j}" placeholder="Write your proof here, then show the answer to grade yourself.">${esc(run.vals[j]||'')}</textarea></div>`;
+  }
+  return `<div class="part"><label for="${id}">${esc(lab)}</label><div class="inrow"><input class="inp" id="${id}" data-j="${j}" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" inputmode="text" enterkeyhint="go" placeholder="${esc(p.ph||PH[p.t])}" value="${esc(run.vals[j]||'')}" ${done?'readonly':''}>${mk}</div>${msg}</div>`;
+}
+
+function renderProblem(){
+  const prob=BYID[run.queue[run.i]], s=SESS[prob.sid];
+  const onlySelf=prob.p.every(p=>p.t==='self'), hasSelf=prob.p.some(p=>p.t==='self');
+  const dots=run.queue.map((id,k)=>{const r=run.sid?store.res[id]:run.results[id];return `<span class="dot${k===run.i?' cur':''}${r==='right'?' r':r==='missed'?' m':''}">${k+1}</span>`}).join('');
+  let fb='';
+  if(run.phase==='right') fb=`<div class="fb ok" role="status"><span class="head">Correct!</span><span class="ans">${esc(prob.ans)}</span>${prob.why?`<span class="why"><b>Why:</b> ${esc(prob.why)}</span>`:''}</div>`;
+  else if(run.phase==='wrong') fb=`<div class="fb bad" role="status"><span class="head">Not quite${run.tried>1?' again':''}.</span><span class="why">${run.allForm?'Your answer has the right value. Fix the form and check again.':'Look at the marked parts, fix them, and check again. Or show the answer.'}</span></div>`;
+  else if(run.phase==='revealed') fb=`<div class="fb ${hasSelf?'info':'bad'}" role="status"><span class="head">${hasSelf?'Answer':'Here’s the answer'}</span><span class="ans">${esc(prob.ans)}</span>${prob.why?`<span class="why"><b>Why:</b> ${esc(prob.why)}</span>`:''}${hasSelf?`<span class="why">Compare it with yours. Did you get it?</span>`:`<span class="why">This one goes on your redo list.</span>`}</div>`;
+
+  let actions='';
+  if(run.phase==='answer'||run.phase==='wrong'){
+    actions=onlySelf?`<button class="btn primary" id="reveal">Show answer</button>`
+      :`<button class="btn primary" id="check">Check answer</button><button class="btn" id="reveal">Show answer</button>`;
+    actions+=`<span class="spacer"></span><button class="btn ghost" id="skip">Skip</button>`;
+  } else if(run.phase==='revealed'&&hasSelf&&!run.selfDone){
+    actions=`<button class="btn okb" id="selfok">I got it</button><button class="btn badb" id="selfbad">I missed it</button>`;
+  } else {
+    actions=`<button class="btn primary" id="next">${run.i+1<run.queue.length?'Next problem →':'See results'}</button>`;
+    if(run.phase==='revealed'&&!hasSelf||run.phase==='wrongfinal') actions+=`<button class="btn ghost" id="override">My answer was right, count it</button>`;
+  }
+
+  app.innerHTML=`
+  <div class="top"><button class="btn ghost" data-go="">← All sessions</button><span class="spacer"></span><button class="btn ghost" data-go="cheat">Cheat sheet</button></div>
+  <div class="sesshead"><span class="eyebrow">${esc(run.sid?s.tag:run.tag)}</span><h1 style="font-size:clamp(1.5rem,4vw,2rem)">${esc(run.title)}</h1>${run.sid&&s.note?`<p class="muted">${esc(s.note)}</p>`:''}<div class="stats" style="font-size:.9rem;gap:6px 16px"><span class="muted">This session: <b data-time="run" style="font-size:1rem">${fmtClock(run.ms||0)}</b></span>${run.streak>=2?`<span class="streak">${FLAME} ${run.streak} in a row</span>`:''}</div></div>
+  <div class="dots" aria-label="Progress">${dots}</div>
+  <details class="ideas" ${run.fresh&&run.sid&&run.i===0?'open':''}><summary>Key ideas${run.sid?'':' · '+esc(s.tag)}</summary><ul>${s.ideas.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></details>
+  <div class="card${run.anim?' '+run.anim:''}">
+    <div style="display:grid;gap:6px"><span class="qnum">${run.sid?'Problem':s.tag+' · Problem'} ${prob.n}${run.sid?' of '+s.probs.length:''}</span><p class="prompt">${esc(prob.q)}</p>${prob.note?`<p class="help">${esc(prob.note)}</p>`:''}</div>
+    <div class="parts">${prob.p.map((p,j)=>partHTML(p,j,prob)).join('')}</div>
+    ${run.phase==='answer'||run.phase==='wrong'?keypadFor(prob.p):''}
+    ${fb}
+    <div class="actions">${actions}</div>
+    ${run.phase==='answer'&&!onlySelf?`<p class="help">Type <code>x^2</code> or <code>x²</code>, <code>sqrt(5)</code> or <code>√5</code>, <code>&lt;=</code> for ≤. Fractions like <code>2/3</code> are fine. Press Enter to check.</p>`:''}
+  </div>`;
+  run.anim=null;
+  wireProblem(prob);
+  const dw=app.querySelector('.dots'), cur=app.querySelector('.dot.cur');
+  if(dw&&cur&&dw.scrollWidth>dw.clientWidth) dw.scrollLeft=cur.offsetLeft-dw.offsetLeft-dw.clientWidth/2+cur.offsetWidth/2;
+}
+/* keep the feedback and the next button on screen (matters on phones with the keyboard up) */
+function showFeedback(){const f=app.querySelector('.fb');if(!f)return;const a=app.querySelector('.card .actions');const r=(a||f).getBoundingClientRect();
+  if(r.bottom>innerHeight-70||f.getBoundingClientRect().top<0) (a||f).scrollIntoView({block:'end',behavior:calm.matches?'auto':'smooth'})}
+
+let lastInput=null;
+function wireProblem(prob){
+  app.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));
+  app.querySelectorAll('.inp').forEach(el=>{
+    el.addEventListener('focus',()=>lastInput=el);
+    el.addEventListener('input',()=>{run.vals[el.dataset.j]=el.value});
+    if(el.tagName==='INPUT') el.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();const b=document.getElementById('check')||document.getElementById('next');b&&b.click()}});
+  });
+  lastInput=app.querySelector('input.inp');
+  app.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
+    const j=+b.dataset.j,o=+b.dataset.o,p=prob.p[j];
+    if(p.t==='choice') run.vals[j]=o; else {const v=new Set(run.vals[j]||[]); v.has(o)?v.delete(o):v.add(o); run.vals[j]=[...v]}
+    if(run.marks) run.marks[j]=null; renderProblem();
+  });
+  app.querySelectorAll('.key').forEach(b=>{
+    b.addEventListener('mousedown',e=>e.preventDefault());
+    /* on phones, handle the tap on touchstart so the input keeps focus and the keyboard stays up */
+    b.addEventListener('touchstart',e=>{e.preventDefault();b.classList.add('tap');setTimeout(()=>b.classList.remove('tap'),120);b.onclick()},{passive:false});
+    b.onclick=()=>{
+      const el=lastInput||app.querySelector('input.inp'); if(!el) return;
+      if(b.dataset.w){el.value=b.dataset.w}
+      else{const t=b.dataset.k, st=el.selectionStart??el.value.length, en=el.selectionEnd??el.value.length;
+        el.value=el.value.slice(0,st)+t+el.value.slice(en); const pos=st+t.length; el.setSelectionRange&&el.setSelectionRange(pos,pos)}
+      run.vals[el.dataset.j]=el.value; el.focus();
+    };
+  });
+  const $=id=>document.getElementById(id);
+  if($('check')) $('check').onclick=()=>doCheck(prob);
+  if($('reveal')) $('reveal').onclick=()=>{run.revealed=true;run.phase='revealed';
+    if(!prob.p.some(p=>p.t==='self')) record(prob,'missed'); renderProblem(); showFeedback()};
+  if($('skip')) $('skip').onclick=()=>{run.i++;resetProblem();render();window.scrollTo(0,0)};
+  if($('next')) $('next').onclick=()=>{run.i++;resetProblem();render();window.scrollTo(0,0)};
+  if($('selfok')) $('selfok').onclick=()=>{record(prob,'right');run.selfDone=true;run.phase='revealed-done';run.streak++;run.best=Math.max(run.best,run.streak);renderProblem();confetti(document.getElementById('next'),45)};
+  if($('selfbad')) $('selfbad').onclick=()=>{record(prob,'missed');run.selfDone=true;run.phase='revealed-done';run.streak=0;renderProblem()};
+  if($('reveal')&&!prob.p.some(p=>p.t==='self')){const f=$('reveal').onclick;$('reveal').onclick=()=>{run.streak=0;f()}}
+  if($('override')) $('override').onclick=()=>{record(prob,'right',true);toast('Counted as right');renderProblem()};
+  const first=app.querySelector('input.inp:not([readonly])'); if(first&&run.phase==='answer'&&!run.vals[0]&&window.matchMedia('(pointer:fine)').matches) first.focus({preventScroll:true});
+  if(run.phase!=='answer'&&run.phase!=='wrong'&&matchMedia('(pointer:fine)').matches){const n=$('next')||$('selfok'); n&&n.focus({preventScroll:true})}
+}
+
+function record(prob,r,force){
+  run.results[prob.id]=r;
+  setRes(prob.id,r);
+  // mixed quiz: a miss always lands on the redo list
+  if(r==='missed') setRes(prob.id,'missed');
+}
+
+function doCheck(prob){
+  app.querySelectorAll('.inp').forEach(el=>run.vals[el.dataset.j]=el.value);
+  const res=prob.p.map((p,j)=>p.t==='self'?{ok:true}:checkPart(p,run.vals[j]));
+  run.msgs={}; let blocked=false;
+  res.forEach((r,j)=>{if(r.ok===null){blocked=true;run.msgs[j]=r.msg}else if(r.msg) run.msgs[j]=r.msg});
+  if(blocked){run.marks=res.map(r=>r.ok===null?null:r.ok);renderProblem();return}
+  run.marks=res.map(r=>r.ok);
+  const all=res.every(r=>r.ok);
+  run.tried++;
+  if(all){
+    run.phase='right'; run.graded=true;
+    record(prob,run.tried===1?'right':'missed');
+    if(run.tried>1) run.results[prob.id]='missed';
+    run.streak=run.tried===1?run.streak+1:0; run.best=Math.max(run.best,run.streak);
+  } else {
+    run.allForm=res.filter(r=>!r.ok).every(r=>r.formOnly);
+    run.phase='wrong'; run.anim='shake'; run.streak=0;
+    if(run.tried===1) record(prob,'missed');
+  }
+  const btn=document.getElementById('check');
+  if(document.activeElement&&document.activeElement.blur) document.activeElement.blur();
+  renderProblem(); showFeedback();
+  if(all){const big=run.streak>0&&run.streak%5===0; confetti(document.querySelector('.fb.ok .head')||btn, big?140:55, big?1.6:1); if(big) toast(`${run.streak} in a row!`)}
+}
+
+function renderSummary(){
+  const ids=run.queue, right=ids.filter(id=>run.results[id]==='right').length, answered=ids.filter(id=>run.results[id]).length;
+  const misses=ids.filter(id=>run.results[id]==='missed').map(id=>BYID[id]);
+  const skipped=ids.length-answered;
+  const topicRows=SESSIONS.map(s=>{const mine=ids.filter(id=>BYID[id].sid===s.id);return {s,n:mine.length,r:mine.filter(id=>run.results[id]==='right').length,m:mine.filter(id=>run.results[id]==='missed').length}}).filter(t=>t.n).sort((a,b)=>a.r/a.n-b.r/b.n);
+  app.innerHTML=`
+  <div class="top"><button class="btn ghost" data-go="">← All sessions</button></div>
+  <div class="card">
+    <span class="eyebrow">${esc(run.tag)} · ${esc(run.title)}</span>
+    <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap"><span class="score"><span id="countup">0</span>/${ids.length}</span><span class="muted">right on the first try${skipped?` · ${skipped} skipped`:''}</span></div>
+    <div class="stats" style="font-size:.95rem"><span class="muted">Time: <b style="font-size:1.1rem">${fmtClock(run.ms||0)}</b></span>${run.best>=2?`<span class="streak">${FLAME} Best streak: ${run.best}</span>`:''}${answered?`<span class="muted">Score: <b style="font-size:1.1rem">${Math.round(right/ids.length*100)}%</b></span>`:''}</div>
+    ${topicRows.length>1?`<h3>By topic</h3><div class="topics">${topicRows.map(t=>`<div class="trow"><span><b>${esc(t.s.tag)}</b> ${esc(t.s.title)}</span>${barHTML(t)}<span class="pct">${t.r}/${t.n}</span></div>`).join('')}</div>`:''}
+    ${misses.length?`<h3>Redo these</h3><ul class="misslist">${misses.map(p=>`<li><span class="eyebrow">${esc(SESS[p.sid].tag)} · #${p.n}</span><span class="q">${esc(p.q)}</span><span class="muted">Answer: ${esc(p.ans)}</span></li>`).join('')}</ul>`:`<p>${answered?'Clean sweep. Nothing to redo from this set.':'You skipped everything in this set.'}</p>`}
+    <div class="actions">
+      ${misses.length?`<button class="btn primary" id="redo">Redo the ${misses.length} I missed</button>`:''}
+      ${misses.length&&run.kind!=='weak'?`<button class="btn" data-go="weak">Weak spots test</button>`:''}
+      ${skipped&&run.sid?`<button class="btn" id="again">Go back to skipped</button>`:''}
+      <button class="btn${misses.length?'':' primary'}" data-go="">Back to sessions</button>
+    </div>
+  </div>`;
+  app.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));
+  const r=document.getElementById('redo'); if(r) r.onclick=()=>{run={...run,kind:'redo',sid:null,tag:'Redo',title:'Problems you missed',queue:misses.map(p=>p.id),i:0,results:{}};resetProblem();render();window.scrollTo(0,0)};
+  const cu=document.getElementById('countup');
+  if(calm.matches||!right) cu.textContent=right; else {const t0=performance.now(),dur=Math.min(1400,300+right*60);(function f(t){const k=Math.min(1,(t-t0)/dur);cu.textContent=Math.round(right*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(f)})(t0)}
+  if(answered&&right/ids.length>=.8) setTimeout(()=>{confetti(null,160,1.8);setTimeout(()=>confetti(null,90,1.4),350)},250);
+  const a=document.getElementById('again'); if(a) a.onclick=()=>{run.i=ids.findIndex(id=>!run.results[id]&&store.res[id]!=='right');if(run.i<0)run.i=0;resetProblem();render()};
+}
+
+/* ================= BOOT ================= */
+window.addEventListener('hashchange',route);
+function boot(){
+  if(!window.math){app.innerHTML='<div class="card"><h2>Loading the math checker…</h2><p class="muted">If this stays here, reload the page.</p></div>';return setTimeout(boot,400)}
+  route();
+}
+boot();
+</script>
+
+</body></html>
